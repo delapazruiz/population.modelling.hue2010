@@ -2,9 +2,7 @@
 title: "Preparing Census data for SMS"
 author: 'Author: Néstor'
 subtitle: Data cleaning and transformation
-output:
-  html_notebook: default
-  github_document: default
+output: github_document
 ---
 
 library(knitr)
