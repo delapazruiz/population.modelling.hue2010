@@ -40,7 +40,8 @@
 # Loading Huehuetla data ---------------------------------
 
 #setwd("C:/SMS_synthetic_population/spatial-microsim-book-master")
-setwd("C:/gitdwmodelling")
+setwd("C:/1.population.modelling/population.modelling")
+
 
 library(tidyverse)
 library(tidyr)
@@ -100,9 +101,6 @@ source("code/02-Huehuetla_CPV2010_Data privacy algorithm.R") # before named h_hp
 sum(hpcons1)
 sum(hpcons2)
 sum(hpcons3)
-
-#Remove unused tables
-remove(hpconsfull, hptotals)
 
 #"Original" constrain variables that required for cleaning and transformation
 hpcons.orig <- hpcons %>%  select( 

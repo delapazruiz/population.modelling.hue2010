@@ -4,9 +4,7 @@ author: 'Author: Néstor'
 subtitle: Data cleaning and transformation
 output:
   html_notebook: default
-  pdf_document: default
-  html_document:
-    df_print: paged
+  github_document: default
 ---
 
 library(knitr)
