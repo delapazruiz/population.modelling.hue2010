@@ -1,17 +1,21 @@
 ---
-title: "Preparing Census data for SMS"
-author: 'Author: Néstor'
-subtitle: Data cleaning and transformation
+title: "Census private data estimation"
+author: 'Author: Néstor de la Paz Ruíz'
 output:
-  html_document:
-    df_print: paged
-  pdf_document: default
-  html_notebook: default
+  github_document:
+    toc: yes
+    toc_depth: 2
 ---
 
-library(knitr)
+`r load(file = "C:/1.population.modelling/population.modelling/results/data/preparing.census.data.for.sms.RData")`
+`r library(knitr)`
+`r library(ggplot2)`
 
 # 1. Introduction
+
+**Enabling SMS with the estimation of block census private data**
+
+![Caption](poster_igisc_SMS_PDF_v2_Madhi.png)
 
 This document shows the steps taken for preparing the census data for SMS. Census data related to `age-ranges, sex, school, and work` allows the estimations DWW pollutants (production and location) depending on population characteristics. 
 
@@ -313,4 +317,7 @@ summary(hpcons1$mP_18A24)
 ggplot(hpcons1, aes(x = mP_18A24)) + geom_bar(fill = "blue")
 ```
 
+```{r echo=FALSE}
+hpcons0[,1:9]
+```
 

@@ -1,7 +1,6 @@
 ---
-title: "Data privacy algorithm"
+title: "Spatial Microsimulation"
 author: 'Author: Néstor de la Paz Ruíz'
-subtitle: 'Enabaling SMS with block census data: Data filling and transformation'
 output:
   github_document:
     toc: yes
@@ -13,8 +12,6 @@ output:
 `r library(ggplot2)`
 
 # 1. Introduction
-
-**Enabaling SMS with block census data: Data filling and transformation**
 
 This document shows the steps taken for preparing the census data for SMS. Census data related to `age-ranges, sex, school, and work` allows the estimations DWW pollutants (production and location) depending on population characteristics. 
 
@@ -316,7 +313,4 @@ summary(hpcons1$mP_18A24)
 ggplot(hpcons1, aes(x = mP_18A24)) + geom_bar(fill = "blue")
 ```
 
-```{r echo=FALSE}
-hpcons0[,1:9]
-```
 
