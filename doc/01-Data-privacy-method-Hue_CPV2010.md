@@ -1,6 +1,6 @@
-0-Huehuetla\_CPV2010\_Data privacy algorithm\_docgithub
+Data privacy algorithm
 ================
-Author: Néstor
+Author: Néstor de la Paz Ruíz
 
   - [1. Introduction](#1-introduction)
       - [1.1 Variables selected](#11-variables-selected)
@@ -20,6 +20,9 @@ Author: Néstor
       - [3.1 Results](#31-results)
 
 # 1\. Introduction
+
+**Enabaling SMS with block census data: Data filling and
+transformation**
 
 This document shows the steps taken for preparing the census data for
 SMS. Census data related to `age-ranges, sex, school, and work` allows
@@ -497,7 +500,7 @@ Summary after cleaning `P_18A24_F` (eliminated `NA` values):
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     ##   0.000   1.000   3.000   3.696   6.000  16.000
 
-![](0A-Huehuetla_CPV2010_Data-privacy-algorithm_github_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](01-Data-privacy-method-Hue_CPV2010_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 Here is a summary before data cleaning for the variable `P_18A24_M`:
 
@@ -509,7 +512,7 @@ Summary after cleaning `P_18A24_M` (eliminated `NA` values):
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     ##   0.000   1.000   3.000   3.554   5.000  14.000
 
-![](0A-Huehuetla_CPV2010_Data-privacy-algorithm_github_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![](01-Data-privacy-method-Hue_CPV2010_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
     ##    mP_0A2 mP_3A5 mP_6A11 mP_12A14 mP_15A17 mP_18A24 mP_25A130 fP_0A2 fP_3A5
     ## 1       0      0       2        0        0        2         1      0      2
