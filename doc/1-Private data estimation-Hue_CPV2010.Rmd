@@ -7,17 +7,26 @@ output:
     toc_depth: 2
 ---
 
-`r load(file = "C:/1.population.modelling/population.modelling/results/data/preparing.census.data.for.sms.RData")`
-`r library(knitr)`
-`r library(ggplot2)`
+```{r setup, include=FALSE}
+#Loading any pre-requirements
+
+#Libraries 
+library(knitr)
+library(ggplot2)
+library(dplyr)
+library(reshape2)
+library(tidyr)
+library(purrr)
+#Data
+load(file = "C:/1.population.modelling/population.modelling/results/data/preparing.census.data.for.sms.RData")
+```
+
 
 # 1. Introduction
 
 **Enabling SMS with the estimation of block census private data**
 
-![Caption](poster_igisc_SMS_PDF_v2_Madhi.png)
-
-This document shows the steps taken for preparing the census data for SMS. Census data related to `age-ranges, sex, school, and work` allows the estimations DWW pollutants (production and location) depending on population characteristics. 
+This document shows the steps taken for preparing the census data for SMS. Census data related to `age-ranges, sex, school, and work` allows the estimations of DWW pollutants (production and location) depending on population characteristics. 
 
 
 ## 1.1 Variables selected
@@ -26,7 +35,9 @@ This document shows the steps taken for preparing the census data for SMS. Censu
 After analyzing **`r paste(ncol(hpconsfull))`** census variables that exist at the block level, **`r paste(ncol(hpcons.orig))`** were required in the phase of `cleaning and transformation` to execute SMS and to provide input data for the DWW ABM. The selected variables will be used to simulate the dynamics of the `mobility`, `biological`, and `social` behaviors as `ABM's submodels`.
 
 ```{r echo=FALSE}
-colnames(hpcons.orig)
+colnames(hptotcons.observ)
+
+colnames(hpcons.estima)
 ```
 
 ## 1.2 `NA` Values
@@ -292,7 +303,7 @@ clean.pvar <- function( = hpcons$P_12YMAS,
 
 As mentioned in section 2.1, each categorical variable has an specific generic function. 
 
-## 3.1 Results
+# 4 Results
 
 In the process of data transformation, it was possible to verify that negative values are not present from the differences of categorical values. It was also verified that the sum of all the values matches the totals of columns, and rows. 
 
@@ -317,7 +328,132 @@ summary(hpcons1$mP_18A24)
 ggplot(hpcons1, aes(x = mP_18A24)) + geom_bar(fill = "blue")
 ```
 
-```{r echo=FALSE}
-hpcons0[,1:9]
+## 4.1 sGISc Conference Poster
+
+This section refers to the results figures presented at the IGISc International Conference on Geospatial Information Sciences at CentroGeo, Mexico.
+
+### 4.1.1 Evaluation
+
+Section 2.1 introduce the target of the algorithm which is the base of an evaluation. The evaluation applies for the `age-ranges and gender`, `school`, and `work` related variables. The results evaluation demonstrate that the algorithm target is fulfilled considering the following criteria:
+
+  * `1. Comparing values between the observed census data of the totals by         locality per variable with estimated values.`
+
+Observed totals by locality  | Estimated totals by locality 
+------------- | -------------
+Known value of a targeted variable  | Defined with the sum of estimated values of the many blocks that compound the target variables (sum by columns)
+
+The bellow graph shows a comparison of observed and estimated totals by locality of the variables of interest.
+
+```{r echo=FALSE, message=FALSE, resize.width= 14}
+full_join(
+  hpcons.estima %>% 
+  map_df(sum)%>%
+  pivot_longer(POBTOT.f:PE_INAC_F.f, 
+               names_to = "census.variables", 
+               values_to = "population.estimated")%>% 
+  mutate(census.variables = as.character(gsub(".f", "", census.variables)))
+  ,
+  hptotcons.observ %>%
+  pivot_longer(POBTOT:PE_INAC_F, 
+               names_to = "census.variables", 
+               values_to = "population.observed")
+  )%>%
+  melt(id.vars = 'census.variables', variable.name = 'Population.Type', 
+                       value.name = 'pupulation.number')%>%
+  ggplot(aes(x = census.variables, 
+             y = pupulation.number, 
+             shape = Population.Type, 
+             color = Population.Type,
+             size = Population.Type
+             ))+
+  geom_point() + 
+  scale_color_manual(values = c("population.observed" = 'red',
+                                'population.estimated' = 'black')) +
+  scale_shape_manual(values = c('population.observed' = 3, 
+                                'population.estimated' = 20))+
+  scale_size_manual(values = c('population.observed' = 2,
+                        'population.estimated' = 6))+
+  labs( x = "Targeted variables at the locality", 
+        y = "Total population by variable",
+        title = "Evaluation of estimation algorithm")+ 
+  theme(axis.text.x = element_text(angle = 90, vjust = .1, hjust=.1))
+
 ```
+
+* `2. Comparing values between the observed census data of the totals by block per variable with estimated values.`
+
+Observed totals by blocks  | Estimated totals by blocks
+------------- | -------------
+Known value of a targeted variable  | Defined with the sum of estimated values of many blocks that compound the target variables (sum by rows)
+
+The bellow graph shows a comparison of observed and estimated totals by block of the variables of interest.
+
+```{r echo=FALSE, message=FALSE, resize.width= 14}
+full_join(
+  hpcons.estima %>% 
+  map_df(sum)%>%
+  pivot_longer(POBTOT.f:PE_INAC_F.f, 
+               names_to = "census.variables", 
+               values_to = "population.estimated")%>% 
+  mutate(census.variables = as.character(gsub(".f", "", census.variables)))
+  ,
+  hptotcons.observ %>%
+  pivot_longer(POBTOT:PE_INAC_F, 
+               names_to = "census.variables", 
+               values_to = "population.observed")
+  )%>%
+  melt(id.vars = 'census.variables', variable.name = 'Population.Type', 
+                       value.name = 'pupulation.number')%>%
+  ggplot(aes(x = census.variables, 
+             y = pupulation.number, 
+             shape = Population.Type, 
+             color = Population.Type,
+             size = Population.Type
+             ))+
+  geom_point() + 
+  scale_color_manual(values = c("population.observed" = 'red',
+                                'population.estimated' = 'black')) +
+  scale_shape_manual(values = c('population.observed' = 3, 
+                                'population.estimated' = 20))+
+  scale_size_manual(values = c('population.observed' = 2,
+                        'population.estimated' = 6))+
+  labs( x = "Targeted variables at the locality", 
+        y = "Total population by variable",
+        title = "Evaluation of estimation algorithm")+ 
+  theme(axis.text.x = element_text(angle = 90, vjust = .1, hjust=.1))
+
+```
+
+```{r}
+(hpcons.estima$P_0A2.f+
+ hpcons.estima$P_3A5.f+
+ hpcons.estima$P_6A11.f+
+ hpcons.estima$P_12YMAS.f) %>% as.data.frame()
+
+hpcons.orig$POBTOT
+
+
+join(
+  
+   (hpcons.estima$P_0A2.f+
+   hpcons.estima$P_3A5.f+
+   hpcons.estima$P_6A11.f+
+   hpcons.estima$P_12YMAS.f)%>%
+   as.data.frame()%>% colnames()%>% c("estimation")
+   
+   
+   %>% 
+   ),
+  (hpcons.orig$POBTOT%>% as.data.frame(col.names = "observation"))
+  )
+
+%>%
+  
+  
+colnames() <- c("observation")
+  
+  melt(id.vars = 'census.variables', variable.name = 'Population.Type', 
+                       value.name = 'pupulation.number')
+```
+
 

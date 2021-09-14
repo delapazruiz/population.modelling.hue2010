@@ -7,9 +7,16 @@ output:
     toc_depth: 2
 ---
 
-`r load(file = "C:/1.population.modelling/population.modelling/results/data/preparing.census.data.for.sms.RData")`
-`r library(knitr)`
-`r library(ggplot2)`
+```{r setup, include=FALSE}
+#Loading any pre-requirements
+
+#Libraries 
+library(knitr)
+library(ggplot2)
+
+#Data
+load(file = "C:/1.population.modelling/population.modelling/results/data/preparing.census.data.for.sms.RData")
+```
 
 # 1. Introduction
 

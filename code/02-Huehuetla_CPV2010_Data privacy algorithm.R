@@ -1,6 +1,6 @@
 #Four table constrains are generated hpcons.c, hpcons1, hpcons2, hpcons3
 #The sumrow_mf function has to be added for clean.pvar.NOA and so on
-
+library(tidyverse)
 
 # Clean "n" P_12YMAS Population 12 years and more------------------------
 
@@ -818,6 +818,53 @@ hpcons0 <- cbind(
 #no need to write hpcons0.csv
 #write.csv(hpcons0, "code/hpcons0.csv", row.names = F)
 
+#RMD: Inputs for Evaluation graphs  ------------------------
+# (x4): hpcons.c, hpcons1, hpcons2, hpcons3
+
+hpcons.estima <- cbind(
+  POBTOT.c, 
+  P_12YMAS.c,
+  P_0A2.c, 
+  P_3A5.c, 
+  P_6A11.c, 
+  P_12A14.c, 
+  P_15A17.c, 
+  P_18A24.c, 
+  
+  P3A5_NOA.c, 
+  P6A11_NOA.c, 
+  P12A14NOA.c,
+  P15A17A.c, 
+  P18A24A.c,
+
+  PEA.c, 
+  PE_INAC.c
+)
+
+
+hptotcons.observ <- hptotcons %>% 
+  select( 
+    POBTOT, POBMAS, POBFEM,
+    P_12YMAS, P_12YMAS_M, P_12YMAS_F,
+    P_0A2, P_0A2_M, P_0A2_F, 
+    P_3A5, P_3A5_M, P_3A5_F,
+    P_6A11, P_6A11_M, P_6A11_F,
+    P_12A14, P_12A14_M, P_12A14_F,
+    P_15A17, P_15A17_M, P_15A17_F,
+    P_18A24, P_18A24_M, P_18A24_F,
+    
+    P3A5_NOA, P3A5_NOA_M, P3A5_NOA_F,
+    P6A11_NOA, P6A11_NOAM, P6A11_NOAF,
+    P12A14NOA, P12A14NOAM, P12A14NOAF,
+    P15A17A, P15A17A_M, P15A17A_F,
+    P18A24A, P18A24A_M, P18A24A_F,
+    
+    PEA, PEA_M, PEA_F,
+    PE_INAC, PE_INAC_M, PE_INAC_F
+  ) %>% 
+  as.data.frame()
+  
+
 remove(
   clean.pvar, clean.pvar.NOA, clean.pvar.P_nAm, clean.pvar.PEA,
   # smcol_mf, smcol_f, smcol_m, smrow_mf,smrow_f, smrow_m,
@@ -838,247 +885,247 @@ remove(
 #VERIFICATION ------------------------
 #Un-comment (Ctrl + Shift + C ) if you want to verify if conditions are fulfilled
 
-# 
-# #If all true, cleaned var matches the real total
-# sum(POBTOT.c$POBTOT.f) == hptotcons$POBTOT
-# sum(POBTOT.c$POBMAS.f) == hptotcons$POBMAS
-# sum(POBTOT.c$POBFEM.f) == hptotcons$POBFEM
-# sum(POBTOT.c$POBTOT.f) == (sum(POBTOT.c$POBMAS.f) + sum(POBTOT.c$POBFEM.f))
-# ifelse (POBTOT.c$POBTOT.f == 
-#           (POBTOT.c$POBMAS.f + POBTOT.c$POBFEM.f), TRUE, FALSE)
-# 
-# #If all true, cleaned var matches the real total
-# sum(P_12YMAS.c$P_12YMAS.f) == hptotcons$P_12YMAS
-# sum(P_12YMAS.c$P_12YMAS_M.f) == hptotcons$P_12YMAS_M
-# sum(P_12YMAS.c$P_12YMAS_F.f) == hptotcons$P_12YMAS_F
-# sum(P_12YMAS.c$P_12YMAS.f) == (sum(P_12YMAS.c$P_12YMAS_M.f) + sum(P_12YMAS.c$P_12YMAS_F.f))
-# ifelse (P_12YMAS.c$P_12YMAS.f ==
-#           (P_12YMAS.c$P_12YMAS_M.f + P_12YMAS.c$P_12YMAS_F.f), TRUE, FALSE)
 
-# #If all true, cleaned var matches the real total
-# sum(P_0A2.c$P_0A2.f) == hptotcons$P_0A2
-# sum(P_0A2.c$P_0A2_M.f) == hptotcons$P_0A2_M
-# sum(P_0A2.c$P_0A2_F.f) == hptotcons$P_0A2_F
-# sum(P_0A2.c$P_0A2.f) == (sum(P_0A2.c$P_0A2_M.f) + sum(P_0A2.c$P_0A2_F.f))
-# ifelse (P_0A2.c$P_0A2.f == 
-#           (P_0A2.c$P_0A2_M.f + P_0A2.c$P_0A2_F.f), TRUE, FALSE)
-# 
-# #If all true, cleaned var matches the real total
-# sum(P_3A5.c$P_3A5.f) == hptotcons$P_3A5
-# sum(P_3A5.c$P_3A5_M.f) == hptotcons$P_3A5_M
-# sum(P_3A5.c$P_3A5_F.f) == hptotcons$P_3A5_F
-# sum(P_3A5.c$P_3A5.f) == (sum(P_3A5.c$P_3A5_M.f) + sum(P_3A5.c$P_3A5_F.f))
-# ifelse (P_3A5.c$P_3A5.f == 
-#           (P_3A5.c$P_3A5_M.f + P_3A5.c$P_3A5_F.f), TRUE, FALSE)
-# 
-# #If all true, cleaned var matches the real total
-# sum(P_6A11.c$P_6A11.f) == hptotcons$P_6A11
-# sum(P_6A11.c$P_6A11_M.f) == hptotcons$P_6A11_M
-# sum(P_6A11.c$P_6A11_F.f) == hptotcons$P_6A11_F
-# sum(P_6A11.c$P_6A11.f) == (sum(P_6A11.c$P_6A11_M.f) + sum(P_6A11.c$P_6A11_F.f))
-# ifelse (P_6A11.c$P_6A11.f == 
-#           (P_6A11.c$P_6A11_M.f + P_6A11.c$P_6A11_F.f), TRUE, FALSE)
-# 
-# #If all true, cleaned var matches the real total
-# sum(P_12A14.c$P_12A14.f) == hptotcons$P_12A14
-# sum(P_12A14.c$P_12A14_M.f) == hptotcons$P_12A14_M
-# sum(P_12A14.c$P_12A14_F.f) == hptotcons$P_12A14_F
-# sum(P_12A14.c$P_12A14.f) == (sum(P_12A14.c$P_12A14_M.f) + sum(P_12A14.c$P_12A14_F.f))
-# ifelse (P_12A14.c$P_12A14.f == 
-#           (P_12A14.c$P_12A14_M.f + P_12A14.c$P_12A14_F.f), TRUE, FALSE)
-# 
-# #If all true, cleaned var matches the real total
-# sum(P_15A17.c$P_15A17.f) == hptotcons$P_15A17
-# sum(P_15A17.c$P_15A17_M.f) == hptotcons$P_15A17_M
-# sum(P_15A17.c$P_15A17_F.f) == hptotcons$P_15A17_F
-# sum(P_15A17.c$P_15A17.f) == (sum(P_15A17.c$P_15A17_M.f) + sum(P_15A17.c$P_15A17_F.f))
-# ifelse (P_15A17.c$P_15A17.f == 
-#           (P_15A17.c$P_15A17_M.f + P_15A17.c$P_15A17_F.f), TRUE, FALSE)
-# 
-# #If all true, cleaned var matches the real total
-# sum(P_18A24.c$P_18A24.f) == hptotcons$P_18A24
-# sum(P_18A24.c$P_18A24_M.f) == hptotcons$P_18A24_M
-# sum(P_18A24.c$P_18A24_F.f) == hptotcons$P_18A24_F
-# sum(P_18A24.c$P_18A24.f) == (sum(P_18A24.c$P_18A24_M.f) + sum(P_18A24.c$P_18A24_F.f))
-# ifelse (P_18A24.c$P_18A24.f == 
-#           (P_18A24.c$P_18A24_M.f + P_18A24.c$P_18A24_F.f), TRUE, FALSE)
-# 
-# #If all true, cleaned var matches the real total
-# ifelse (P_25A130.c$P_25A130.f == 
-#           (P_25A130.c$P_25A130_M.f + P_25A130.c$P_25A130_F.f), TRUE, FALSE)
-# 
 #If all true, cleaned var matches the real total
-# sum(P3A5_NOA.c$P3A5_NOA.f) == hptotcons$P3A5_NOA
-# sum(P3A5_NOA.c$P3A5_NOA_M.f) == hptotcons$P3A5_NOA_M
-# sum(P3A5_NOA.c$P3A5_NOA_F.f) == hptotcons$P3A5_NOA_F
-# sum(P3A5_NOA.c$P3A5_NOA.f) == (sum(P3A5_NOA.c$P3A5_NOA_M.f) + sum(P3A5_NOA.c$P3A5_NOA_F.f))
-# ifelse (P3A5_NOA.c$P3A5_NOA.f ==
-#           (P3A5_NOA.c$P3A5_NOA_M.f + P3A5_NOA.c$P3A5_NOA_F.f), TRUE, FALSE)
-# 
-# #If all true, cleaned var matches the real total
-# sum(P6A11_NOA.c$P6A11_NOA.f) == hptotcons$P6A11_NOA
-# sum(P6A11_NOA.c$P6A11_NOAM.f) == hptotcons$P6A11_NOAM
-# sum(P6A11_NOA.c$P6A11_NOAF.f) == hptotcons$P6A11_NOAF
-# sum(P6A11_NOA.c$P6A11_NOA.f) == (sum(P6A11_NOA.c$P6A11_NOAM.f) + sum(P6A11_NOA.c$P6A11_NOAF.f))
-# ifelse (P6A11_NOA.c$P6A11_NOA.f ==
-#           (P6A11_NOA.c$P6A11_NOAM.f + P6A11_NOA.c$P6A11_NOAF.f), TRUE, FALSE)
-# 
-# #If all true, cleaned var matches the real total
-# sum(P12A14NOA.c$P12A14NOA.f) == hptotcons$P12A14NOA
-# sum(P12A14NOA.c$P12A14NOAM.f) == hptotcons$P12A14NOAM
-# sum(P12A14NOA.c$P12A14NOAF.f) == hptotcons$P12A14NOAF
-# sum(P12A14NOA.c$P12A14NOA.f) == (sum(P12A14NOA.c$P12A14NOAM.f) + sum(P12A14NOA.c$P12A14NOAF.f))
-# ifelse (P12A14NOA.c$P12A14NOA.f ==
-#           (P12A14NOA.c$P12A14NOAM.f + P12A14NOA.c$P12A14NOAF.f), TRUE, FALSE)
-# 
-# #If all true, cleaned var matches the real total
-# sum(P15A17A.c$P15A17A.f) == hptotcons$P15A17A
-# sum(P15A17A.c$P15A17A_M.f) == hptotcons$P15A17A_M
-# sum(P15A17A.c$P15A17A_F.f) == hptotcons$P15A17A_F
-# sum(P15A17A.c$P15A17A.f) == (sum(P15A17A.c$P15A17A_M.f) + sum(P15A17A.c$P15A17A_F.f))
-# ifelse (P15A17A.c$P15A17A.f ==
-#           (P15A17A.c$P15A17A_M.f + P15A17A.c$P15A17A_F.f), TRUE, FALSE)
-# 
-# #If all true, cleaned var matches the real total
-# sum(P18A24A.c$P18A24A.f) == hptotcons$P18A24A
-# sum(P18A24A.c$P18A24A_M.f) == hptotcons$P18A24A_M
-# sum(P18A24A.c$P18A24A_F.f) == hptotcons$P18A24A_F
-# sum(P18A24A.c$P18A24A.f) == (sum(P18A24A.c$P18A24A_M.f) + sum(P18A24A.c$P18A24A_F.f))
-# ifelse (P18A24A.c$P18A24A.f ==
-#           (P18A24A.c$P18A24A_M.f + P18A24A.c$P18A24A_F.f), TRUE, FALSE)
-#
+sum(POBTOT.c$POBTOT.f) == hptotcons$POBTOT
+sum(POBTOT.c$POBMAS.f) == hptotcons$POBMAS
+sum(POBTOT.c$POBFEM.f) == hptotcons$POBFEM
+sum(POBTOT.c$POBTOT.f) == (sum(POBTOT.c$POBMAS.f) + sum(POBTOT.c$POBFEM.f))
+ifelse (POBTOT.c$POBTOT.f ==
+          (POBTOT.c$POBMAS.f + POBTOT.c$POBFEM.f), TRUE, FALSE)
+
 #If all true, cleaned var matches the real total
-# sum(PEA.c$PEA.f) == hptotcons$PEA
-# sum(PEA.c$PEA_M.f) == hptotcons$PEA_M
-# sum(PEA.c$PEA_F.f) == hptotcons$PEA_F
-# sum(PEA.c$PEA.f) == (sum(PEA.c$PEA_M.f) + sum(PEA.c$PEA_F.f))
-# ifelse (PEA.c$PEA.f ==
-#           (PEA.c$PEA_M.f + PEA.c$PEA_F.f), TRUE, FALSE)
-# 
-# #If all true, cleaned var matches the real total
-# sum(PE_INAC.c$PE_INAC.f) == hptotcons$PE_INAC
-# sum(PE_INAC.c$PE_INAC_M.f) == hptotcons$PE_INAC_M
-# sum(PE_INAC.c$PE_INAC_F.f) == hptotcons$PE_INAC_F
-# sum(PE_INAC.c$PE_INAC.f) == (sum(PE_INAC.c$PE_INAC_M.f) + sum(PE_INAC.c$PE_INAC_F.f))
-# ifelse (PE_INAC.c$PE_INAC.f ==
-#           (PE_INAC.c$PE_INAC_M.f + PE_INAC.c$PE_INAC_F.f), TRUE, FALSE)
+sum(P_12YMAS.c$P_12YMAS.f) == hptotcons$P_12YMAS
+sum(P_12YMAS.c$P_12YMAS_M.f) == hptotcons$P_12YMAS_M
+sum(P_12YMAS.c$P_12YMAS_F.f) == hptotcons$P_12YMAS_F
+sum(P_12YMAS.c$P_12YMAS.f) == (sum(P_12YMAS.c$P_12YMAS_M.f) + sum(P_12YMAS.c$P_12YMAS_F.f))
+ifelse (P_12YMAS.c$P_12YMAS.f ==
+          (P_12YMAS.c$P_12YMAS_M.f + P_12YMAS.c$P_12YMAS_F.f), TRUE, FALSE)
 
-# #FINALLY verify sum of total population and rows
-# #Sum of MF variables cleaned vs POBTOT
-# sum(POBTOT.c$POBTOT.f)
-# sum(P_25A130.c$P_25A130.f,
-#     P_18A24.c$P_18A24.f,
-#     P_15A17.c$P_15A17.f,
-#     P_12A14.c$P_12A14.f,
-#     P_6A11.c$P_6A11.f,
-#     P_3A5.c$P_3A5.f,
-#     P_0A2.c$P_0A2.f)
-# #Sum of separated Male - Female
-# sum(P_25A130.c$P_25A130_F.f,
-#     P_18A24.c$P_18A24_F.f,
-#     P_15A17.c$P_15A17_F.f,
-#     P_12A14.c$P_12A14_F.f,
-#     P_6A11.c$P_6A11_F.f,
-#     P_3A5.c$P_3A5_F.f,
-#     P_0A2.c$P_0A2_F.f,
-#     P_25A130.c$P_25A130_M.f,
-#     P_18A24.c$P_18A24_M.f,
-#     P_15A17.c$P_15A17_M.f,
-#     P_12A14.c$P_12A14_M.f,
-#     P_6A11.c$P_6A11_M.f,
-#     P_3A5.c$P_3A5_M.f,
-#     P_0A2.c$P_0A2_M.f)
-# #Sum of Female cleaned vs POBFEM
-# sum(POBTOT.c$POBFEM.f)
-# sum(P_25A130.c$P_25A130_F.f,
-#     P_18A24.c$P_18A24_F.f,
-#     P_15A17.c$P_15A17_F.f,
-#     P_12A14.c$P_12A14_F.f,
-#     P_6A11.c$P_6A11_F.f,
-#     P_3A5.c$P_3A5_F.f,
-#     P_0A2.c$P_0A2_F.f)
-# #Sum of Male cleaned vs POBMAS
-# sum(POBTOT.c$POBMAS.f)
-# sum(P_25A130.c$P_25A130_M.f,
-#     P_18A24.c$P_18A24_M.f,
-#     P_15A17.c$P_15A17_M.f,
-#     P_12A14.c$P_12A14_M.f,
-#     P_6A11.c$P_6A11_M.f,
-#     P_3A5.c$P_3A5_M.f,
-#     P_0A2.c$P_0A2_M.f)
-# #Row comparison of estimated vs real for M+F
-# ifelse (POBTOT.c$POBTOT.f ==
-#         (P_25A130.c$P_25A130.f+
-#            P_18A24.c$P_18A24.f+
-#            P_15A17.c$P_15A17.f+
-#            P_12A14.c$P_12A14.f+
-#            P_6A11.c$P_6A11.f+
-#            P_3A5.c$P_3A5.f+
-#            P_0A2.c$P_0A2.f), TRUE, FALSE)
-# #Row comparison of estimated vs real for M
-# ifelse (POBTOT.c$POBMAS.f ==
-#         (P_25A130.c$P_25A130_M.f+
-#            P_18A24.c$P_18A24_M.f+
-#            P_15A17.c$P_15A17_M.f+
-#            P_12A14.c$P_12A14_M.f+
-#            P_6A11.c$P_6A11_M.f+
-#            P_3A5.c$P_3A5_M.f+
-#            P_0A2.c$P_0A2_M.f), TRUE, FALSE)
-# #Row comparison of estimated vs real for F
-# ifelse (POBTOT.c$POBFEM.f ==
-#         (P_25A130.c$P_25A130_F.f+
-#            P_18A24.c$P_18A24_F.f+
-#            P_15A17.c$P_15A17_F.f+
-#            P_12A14.c$P_12A14_F.f+
-#            P_6A11.c$P_6A11_F.f+
-#            P_3A5.c$P_3A5_F.f+
-#            P_0A2.c$P_0A2_F.f), TRUE, FALSE)
-# #Differences by F+M totals
-# POBTOT.c$POBTOT.f -
-#     (P_25A130.c$P_25A130.f+
-#        P_18A24.c$P_18A24.f+
-#        P_15A17.c$P_15A17.f+
-#        P_12A14.c$P_12A14.f+
-#        P_6A11.c$P_6A11.f+
-#        P_3A5.c$P_3A5.f+
-#        P_0A2.c$P_0A2.f)
-# #Differences by M totals
-# POBTOT.c$POBMAS.f -
-#           (P_25A130.c$P_25A130_M.f+
-#              P_18A24.c$P_18A24_M.f+
-#              P_15A17.c$P_15A17_M.f+
-#              P_12A14.c$P_12A14_M.f+
-#              P_6A11.c$P_6A11_M.f+
-#              P_3A5.c$P_3A5_M.f+
-#              P_0A2.c$P_0A2_M.f)
-# #Differences by F totals
-# POBTOT.c$POBFEM.f -
-#           (P_25A130.c$P_25A130_F.f+
-#              P_18A24.c$P_18A24_F.f+
-#              P_15A17.c$P_15A17_F.f+
-#              P_12A14.c$P_12A14_F.f+
-#              P_6A11.c$P_6A11_F.f+
-#              P_3A5.c$P_3A5_F.f+
-#              P_0A2.c$P_0A2_F.f)
-# #Sum of Differences by F+M and real totals
-# sum(POBTOT.c$POBTOT.f -
-#   (P_25A130.c$P_25A130.f+
-#      P_18A24.c$P_18A24.f+
-#      P_15A17.c$P_15A17.f+
-#      P_12A14.c$P_12A14.f+
-#      P_6A11.c$P_6A11.f+
-#      P_3A5.c$P_3A5.f+
-#      P_0A2.c$P_0A2.f))
+#If all true, cleaned var matches the real total
+sum(P_0A2.c$P_0A2.f) == hptotcons$P_0A2
+sum(P_0A2.c$P_0A2_M.f) == hptotcons$P_0A2_M
+sum(P_0A2.c$P_0A2_F.f) == hptotcons$P_0A2_F
+sum(P_0A2.c$P_0A2.f) == (sum(P_0A2.c$P_0A2_M.f) + sum(P_0A2.c$P_0A2_F.f))
+ifelse (P_0A2.c$P_0A2.f ==
+          (P_0A2.c$P_0A2_M.f + P_0A2.c$P_0A2_F.f), TRUE, FALSE)
 
-# #Verification PE_INACT, PEAT
-#   sum(P_0A11.c$P_0A11.f, P_12YMAS.c$P_12YMAS.f) == sum(POBTOT.c$POBTOT.f)
-#   sum(POBTOT.c$POBTOT.f)
-#   sum(PEAT.c + PE_INACT.c)
-#   sum(PEAT.c + PE_INACT.c) == sum(POBTOT.c$POBTOT.f)
-#   PEAT.c$PEAT.f
-#   PE_INACT.c$PE_INACT.f
-#    
-#   ifelse (POBTOT.c$POBTOT.f == 
-#              (PEAT.c$PEAT.f + PE_INACT.c$PE_INACT.f), TRUE, FALSE)
+#If all true, cleaned var matches the real total
+sum(P_3A5.c$P_3A5.f) == hptotcons$P_3A5
+sum(P_3A5.c$P_3A5_M.f) == hptotcons$P_3A5_M
+sum(P_3A5.c$P_3A5_F.f) == hptotcons$P_3A5_F
+sum(P_3A5.c$P_3A5.f) == (sum(P_3A5.c$P_3A5_M.f) + sum(P_3A5.c$P_3A5_F.f))
+ifelse (P_3A5.c$P_3A5.f ==
+          (P_3A5.c$P_3A5_M.f + P_3A5.c$P_3A5_F.f), TRUE, FALSE)
+
+#If all true, cleaned var matches the real total
+sum(P_6A11.c$P_6A11.f) == hptotcons$P_6A11
+sum(P_6A11.c$P_6A11_M.f) == hptotcons$P_6A11_M
+sum(P_6A11.c$P_6A11_F.f) == hptotcons$P_6A11_F
+sum(P_6A11.c$P_6A11.f) == (sum(P_6A11.c$P_6A11_M.f) + sum(P_6A11.c$P_6A11_F.f))
+ifelse (P_6A11.c$P_6A11.f ==
+          (P_6A11.c$P_6A11_M.f + P_6A11.c$P_6A11_F.f), TRUE, FALSE)
+
+#If all true, cleaned var matches the real total
+sum(P_12A14.c$P_12A14.f) == hptotcons$P_12A14
+sum(P_12A14.c$P_12A14_M.f) == hptotcons$P_12A14_M
+sum(P_12A14.c$P_12A14_F.f) == hptotcons$P_12A14_F
+sum(P_12A14.c$P_12A14.f) == (sum(P_12A14.c$P_12A14_M.f) + sum(P_12A14.c$P_12A14_F.f))
+ifelse (P_12A14.c$P_12A14.f ==
+          (P_12A14.c$P_12A14_M.f + P_12A14.c$P_12A14_F.f), TRUE, FALSE)
+
+#If all true, cleaned var matches the real total
+sum(P_15A17.c$P_15A17.f) == hptotcons$P_15A17
+sum(P_15A17.c$P_15A17_M.f) == hptotcons$P_15A17_M
+sum(P_15A17.c$P_15A17_F.f) == hptotcons$P_15A17_F
+sum(P_15A17.c$P_15A17.f) == (sum(P_15A17.c$P_15A17_M.f) + sum(P_15A17.c$P_15A17_F.f))
+ifelse (P_15A17.c$P_15A17.f ==
+          (P_15A17.c$P_15A17_M.f + P_15A17.c$P_15A17_F.f), TRUE, FALSE)
+
+#If all true, cleaned var matches the real total
+sum(P_18A24.c$P_18A24.f) == hptotcons$P_18A24
+sum(P_18A24.c$P_18A24_M.f) == hptotcons$P_18A24_M
+sum(P_18A24.c$P_18A24_F.f) == hptotcons$P_18A24_F
+sum(P_18A24.c$P_18A24.f) == (sum(P_18A24.c$P_18A24_M.f) + sum(P_18A24.c$P_18A24_F.f))
+ifelse (P_18A24.c$P_18A24.f ==
+          (P_18A24.c$P_18A24_M.f + P_18A24.c$P_18A24_F.f), TRUE, FALSE)
+
+#If all true, cleaned var matches the real total
+ifelse (P_25A130.c$P_25A130.f ==
+          (P_25A130.c$P_25A130_M.f + P_25A130.c$P_25A130_F.f), TRUE, FALSE)
+
+If all true, cleaned var matches the real total
+sum(P3A5_NOA.c$P3A5_NOA.f) == hptotcons$P3A5_NOA
+sum(P3A5_NOA.c$P3A5_NOA_M.f) == hptotcons$P3A5_NOA_M
+sum(P3A5_NOA.c$P3A5_NOA_F.f) == hptotcons$P3A5_NOA_F
+sum(P3A5_NOA.c$P3A5_NOA.f) == (sum(P3A5_NOA.c$P3A5_NOA_M.f) + sum(P3A5_NOA.c$P3A5_NOA_F.f))
+ifelse (P3A5_NOA.c$P3A5_NOA.f ==
+          (P3A5_NOA.c$P3A5_NOA_M.f + P3A5_NOA.c$P3A5_NOA_F.f), TRUE, FALSE)
+
+#If all true, cleaned var matches the real total
+sum(P6A11_NOA.c$P6A11_NOA.f) == hptotcons$P6A11_NOA
+sum(P6A11_NOA.c$P6A11_NOAM.f) == hptotcons$P6A11_NOAM
+sum(P6A11_NOA.c$P6A11_NOAF.f) == hptotcons$P6A11_NOAF
+sum(P6A11_NOA.c$P6A11_NOA.f) == (sum(P6A11_NOA.c$P6A11_NOAM.f) + sum(P6A11_NOA.c$P6A11_NOAF.f))
+ifelse (P6A11_NOA.c$P6A11_NOA.f ==
+          (P6A11_NOA.c$P6A11_NOAM.f + P6A11_NOA.c$P6A11_NOAF.f), TRUE, FALSE)
+
+#If all true, cleaned var matches the real total
+sum(P12A14NOA.c$P12A14NOA.f) == hptotcons$P12A14NOA
+sum(P12A14NOA.c$P12A14NOAM.f) == hptotcons$P12A14NOAM
+sum(P12A14NOA.c$P12A14NOAF.f) == hptotcons$P12A14NOAF
+sum(P12A14NOA.c$P12A14NOA.f) == (sum(P12A14NOA.c$P12A14NOAM.f) + sum(P12A14NOA.c$P12A14NOAF.f))
+ifelse (P12A14NOA.c$P12A14NOA.f ==
+          (P12A14NOA.c$P12A14NOAM.f + P12A14NOA.c$P12A14NOAF.f), TRUE, FALSE)
+
+#If all true, cleaned var matches the real total
+sum(P15A17A.c$P15A17A.f) == hptotcons$P15A17A
+sum(P15A17A.c$P15A17A_M.f) == hptotcons$P15A17A_M
+sum(P15A17A.c$P15A17A_F.f) == hptotcons$P15A17A_F
+sum(P15A17A.c$P15A17A.f) == (sum(P15A17A.c$P15A17A_M.f) + sum(P15A17A.c$P15A17A_F.f))
+ifelse (P15A17A.c$P15A17A.f ==
+          (P15A17A.c$P15A17A_M.f + P15A17A.c$P15A17A_F.f), TRUE, FALSE)
+
+#If all true, cleaned var matches the real total
+sum(P18A24A.c$P18A24A.f) == hptotcons$P18A24A
+sum(P18A24A.c$P18A24A_M.f) == hptotcons$P18A24A_M
+sum(P18A24A.c$P18A24A_F.f) == hptotcons$P18A24A_F
+sum(P18A24A.c$P18A24A.f) == (sum(P18A24A.c$P18A24A_M.f) + sum(P18A24A.c$P18A24A_F.f))
+ifelse (P18A24A.c$P18A24A.f ==
+          (P18A24A.c$P18A24A_M.f + P18A24A.c$P18A24A_F.f), TRUE, FALSE)
+
+If all true, cleaned var matches the real total
+sum(PEA.c$PEA.f) == hptotcons$PEA
+sum(PEA.c$PEA_M.f) == hptotcons$PEA_M
+sum(PEA.c$PEA_F.f) == hptotcons$PEA_F
+sum(PEA.c$PEA.f) == (sum(PEA.c$PEA_M.f) + sum(PEA.c$PEA_F.f))
+ifelse (PEA.c$PEA.f ==
+          (PEA.c$PEA_M.f + PEA.c$PEA_F.f), TRUE, FALSE)
+
+#If all true, cleaned var matches the real total
+sum(PE_INAC.c$PE_INAC.f) == hptotcons$PE_INAC
+sum(PE_INAC.c$PE_INAC_M.f) == hptotcons$PE_INAC_M
+sum(PE_INAC.c$PE_INAC_F.f) == hptotcons$PE_INAC_F
+sum(PE_INAC.c$PE_INAC.f) == (sum(PE_INAC.c$PE_INAC_M.f) + sum(PE_INAC.c$PE_INAC_F.f))
+ifelse (PE_INAC.c$PE_INAC.f ==
+          (PE_INAC.c$PE_INAC_M.f + PE_INAC.c$PE_INAC_F.f), TRUE, FALSE)
+
+#FINALLY verify sum of total population and rows
+#Sum of MF variables cleaned vs POBTOT
+sum(POBTOT.c$POBTOT.f)
+sum(P_25A130.c$P_25A130.f,
+    P_18A24.c$P_18A24.f,
+    P_15A17.c$P_15A17.f,
+    P_12A14.c$P_12A14.f,
+    P_6A11.c$P_6A11.f,
+    P_3A5.c$P_3A5.f,
+    P_0A2.c$P_0A2.f)
+#Sum of separated Male - Female
+sum(P_25A130.c$P_25A130_F.f,
+    P_18A24.c$P_18A24_F.f,
+    P_15A17.c$P_15A17_F.f,
+    P_12A14.c$P_12A14_F.f,
+    P_6A11.c$P_6A11_F.f,
+    P_3A5.c$P_3A5_F.f,
+    P_0A2.c$P_0A2_F.f,
+    P_25A130.c$P_25A130_M.f,
+    P_18A24.c$P_18A24_M.f,
+    P_15A17.c$P_15A17_M.f,
+    P_12A14.c$P_12A14_M.f,
+    P_6A11.c$P_6A11_M.f,
+    P_3A5.c$P_3A5_M.f,
+    P_0A2.c$P_0A2_M.f)
+#Sum of Female cleaned vs POBFEM
+sum(POBTOT.c$POBFEM.f)
+sum(P_25A130.c$P_25A130_F.f,
+    P_18A24.c$P_18A24_F.f,
+    P_15A17.c$P_15A17_F.f,
+    P_12A14.c$P_12A14_F.f,
+    P_6A11.c$P_6A11_F.f,
+    P_3A5.c$P_3A5_F.f,
+    P_0A2.c$P_0A2_F.f)
+#Sum of Male cleaned vs POBMAS
+sum(POBTOT.c$POBMAS.f)
+sum(P_25A130.c$P_25A130_M.f,
+    P_18A24.c$P_18A24_M.f,
+    P_15A17.c$P_15A17_M.f,
+    P_12A14.c$P_12A14_M.f,
+    P_6A11.c$P_6A11_M.f,
+    P_3A5.c$P_3A5_M.f,
+    P_0A2.c$P_0A2_M.f)
+#Row comparison of estimated vs real for M+F
+ifelse (POBTOT.c$POBTOT.f ==
+        (P_25A130.c$P_25A130.f+
+           P_18A24.c$P_18A24.f+
+           P_15A17.c$P_15A17.f+
+           P_12A14.c$P_12A14.f+
+           P_6A11.c$P_6A11.f+
+           P_3A5.c$P_3A5.f+
+           P_0A2.c$P_0A2.f), TRUE, FALSE)
+#Row comparison of estimated vs real for M
+ifelse (POBTOT.c$POBMAS.f ==
+        (P_25A130.c$P_25A130_M.f+
+           P_18A24.c$P_18A24_M.f+
+           P_15A17.c$P_15A17_M.f+
+           P_12A14.c$P_12A14_M.f+
+           P_6A11.c$P_6A11_M.f+
+           P_3A5.c$P_3A5_M.f+
+           P_0A2.c$P_0A2_M.f), TRUE, FALSE)
+#Row comparison of estimated vs real for F
+ifelse (POBTOT.c$POBFEM.f ==
+        (P_25A130.c$P_25A130_F.f+
+           P_18A24.c$P_18A24_F.f+
+           P_15A17.c$P_15A17_F.f+
+           P_12A14.c$P_12A14_F.f+
+           P_6A11.c$P_6A11_F.f+
+           P_3A5.c$P_3A5_F.f+
+           P_0A2.c$P_0A2_F.f), TRUE, FALSE)
+#Differences by F+M totals
+POBTOT.c$POBTOT.f -
+    (P_25A130.c$P_25A130.f+
+       P_18A24.c$P_18A24.f+
+       P_15A17.c$P_15A17.f+
+       P_12A14.c$P_12A14.f+
+       P_6A11.c$P_6A11.f+
+       P_3A5.c$P_3A5.f+
+       P_0A2.c$P_0A2.f)
+#Differences by M totals
+POBTOT.c$POBMAS.f -
+          (P_25A130.c$P_25A130_M.f+
+             P_18A24.c$P_18A24_M.f+
+             P_15A17.c$P_15A17_M.f+
+             P_12A14.c$P_12A14_M.f+
+             P_6A11.c$P_6A11_M.f+
+             P_3A5.c$P_3A5_M.f+
+             P_0A2.c$P_0A2_M.f)
+#Differences by F totals
+POBTOT.c$POBFEM.f -
+          (P_25A130.c$P_25A130_F.f+
+             P_18A24.c$P_18A24_F.f+
+             P_15A17.c$P_15A17_F.f+
+             P_12A14.c$P_12A14_F.f+
+             P_6A11.c$P_6A11_F.f+
+             P_3A5.c$P_3A5_F.f+
+             P_0A2.c$P_0A2_F.f)
+#Sum of Differences by F+M and real totals
+sum(POBTOT.c$POBTOT.f -
+  (P_25A130.c$P_25A130.f+
+     P_18A24.c$P_18A24.f+
+     P_15A17.c$P_15A17.f+
+     P_12A14.c$P_12A14.f+
+     P_6A11.c$P_6A11.f+
+     P_3A5.c$P_3A5.f+
+     P_0A2.c$P_0A2.f))
+
+#Verification PE_INACT, PEAT
+  sum(P_0A11.c$P_0A11.f, P_12YMAS.c$P_12YMAS.f) == sum(POBTOT.c$POBTOT.f)
+  sum(POBTOT.c$POBTOT.f)
+  sum(PEAT.c + PE_INACT.c)
+  sum(PEAT.c + PE_INACT.c) == sum(POBTOT.c$POBTOT.f)
+  PEAT.c$PEAT.f
+  PE_INACT.c$PE_INACT.f
+
+  ifelse (POBTOT.c$POBTOT.f ==
+             (PEAT.c$PEAT.f + PE_INACT.c$PE_INACT.f), TRUE, FALSE)
 
 

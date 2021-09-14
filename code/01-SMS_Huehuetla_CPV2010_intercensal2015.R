@@ -27,8 +27,8 @@
 ##            03-Huehuetla_Intercensal2015_data preparation.R
 ##            
 ## List of Rmarkdown documentation:
-##            0A-Huehuetla_CPV2010_Data privacy algorithm_Documentation.Rmd
-##            0B-SMS_Huehuetla_CPV2010_intercensal2015_Documentation.Rmd
+##            1-Private data estimation-Hue_CPV2010.Rmd
+##            2-SMS_Hue_CPV2010_intercen2015.Rmd
 ##
 ## Input data: 
 ##            1) Block level: huehuetlaCPV2010block.csv (censo pob y vivi 2010)

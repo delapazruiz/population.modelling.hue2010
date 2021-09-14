@@ -17,17 +17,16 @@ Author: Néstor de la Paz Ruíz
         block.](#23-rows-smrow_-consistency-in-the-totals-by-block)
       - [2.3 Extra conditionals (M, F)](#23-extra-conditionals-m-f)
   - [3 Generic cleaning function](#3-generic-cleaning-function)
-      - [3.1 Results](#31-results)
+  - [4 Results](#4-results)
+      - [4.1.1 Evaluation](#411-evaluation)
 
 # 1\. Introduction
 
 **Enabling SMS with the estimation of block census private data**
 
-![Caption](poster_igisc_SMS_PDF_v2_Madhi.png)
-
 This document shows the steps taken for preparing the census data for
 SMS. Census data related to `age-ranges, sex, school, and work` allows
-the estimations DWW pollutants (production and location) depending on
+the estimations of DWW pollutants (production and location) depending on
 population characteristics.
 
 ## 1.1 Variables selected
@@ -44,9 +43,19 @@ variables will be used to simulate the dynamics of the `mobility`,
     ## [16] "P_12A14"    "P_12A14_M"  "P_12A14_F"  "P_15A17"    "P_15A17_M" 
     ## [21] "P_15A17_F"  "P_18A24"    "P_18A24_M"  "P_18A24_F"  "P3A5_NOA"  
     ## [26] "P3A5_NOA_M" "P3A5_NOA_F" "P6A11_NOA"  "P6A11_NOAM" "P6A11_NOAF"
-    ## [31] "P12A14NOA"  "P12A14NOAM" "P12A14NOAF" "P18A24A"    "P18A24A_M" 
-    ## [36] "P18A24A_F"  "P15A17A"    "P15A17A_M"  "P15A17A_F"  "PEA"       
+    ## [31] "P12A14NOA"  "P12A14NOAM" "P12A14NOAF" "P15A17A"    "P15A17A_M" 
+    ## [36] "P15A17A_F"  "P18A24A"    "P18A24A_M"  "P18A24A_F"  "PEA"       
     ## [41] "PEA_M"      "PEA_F"      "PE_INAC"    "PE_INAC_M"  "PE_INAC_F"
+
+    ##  [1] "POBTOT.f"     "POBMAS.f"     "POBFEM.f"     "P_12YMAS.f"   "P_12YMAS_M.f"
+    ##  [6] "P_12YMAS_F.f" "P_0A2.f"      "P_0A2_M.f"    "P_0A2_F.f"    "P_3A5.f"     
+    ## [11] "P_3A5_M.f"    "P_3A5_F.f"    "P_6A11.f"     "P_6A11_M.f"   "P_6A11_F.f"  
+    ## [16] "P_12A14.f"    "P_12A14_M.f"  "P_12A14_F.f"  "P_15A17.f"    "P_15A17_M.f" 
+    ## [21] "P_15A17_F.f"  "P_18A24.f"    "P_18A24_M.f"  "P_18A24_F.f"  "P3A5_NOA.f"  
+    ## [26] "P3A5_NOA_M.f" "P3A5_NOA_F.f" "P6A11_NOA.f"  "P6A11_NOAM.f" "P6A11_NOAF.f"
+    ## [31] "P12A14NOA.f"  "P12A14NOAM.f" "P12A14NOAF.f" "P15A17A.f"    "P15A17A_M.f" 
+    ## [36] "P15A17A_F.f"  "P18A24A.f"    "P18A24A_M.f"  "P18A24A_F.f"  "PEA.f"       
+    ## [41] "PEA_M.f"      "PEA_F.f"      "PE_INAC.f"    "PE_INAC_M.f"  "PE_INAC_F.f"
 
 ## 1.2 `NA` Values
 
@@ -484,7 +493,7 @@ clean.pvar <- function( = hpcons$P_12YMAS,
 As mentioned in section 2.1, each categorical variable has an specific
 generic function.
 
-## 3.1 Results
+# 4 Results
 
 In the process of data transformation, it was possible to verify that
 negative values are not present from the differences of categorical
@@ -515,60 +524,50 @@ Summary after cleaning `P_18A24_M` (eliminated `NA` values):
 
 ![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
-    ##    mP_0A2 mP_3A5 mP_6A11 mP_12A14 mP_15A17 mP_18A24 mP_25A130 fP_0A2 fP_3A5
-    ## 1       0      0       2        0        0        2         1      0      2
-    ## 2       2      3       4        1        0        4        17      2      1
-    ## 3       1      3       3        3        1        5        13      2      1
-    ## 4       2      0       0        2        0        1         3      0      2
-    ## 5       0      0       5        1        0        3         8      2      0
-    ## 6       2      0       2        0        0        2        11      0      2
-    ## 7       3      3       4        4        2        8        28      4      0
-    ## 8       2      0       4        0        0        3        13      0      2
-    ## 9       2      4       5        4        1        6        20      0      3
-    ## 10      1      0       4        3        1        5        10      2      2
-    ## 11      1      0       3        0        3        3         7      3      2
-    ## 12      1      0       3        3        3        3         7      1      2
-    ## 13      1      1       2        1        0        0         0      0      0
-    ## 14      0      1       3        0        1        5         8      0      0
-    ## 15      0      0       3        0        0        0         2      0      0
-    ## 16      0      0       0        1        0        3         4      0      0
-    ## 17      4      7       8        5        3        7        31      3      3
-    ## 18      0      2       1        0        0        0         2      0      1
-    ## 19      1      2       5        3        1        2        11      0      1
-    ## 20      1      1       1        3        1        2         9      4      3
-    ## 21      1      1       3        2        3        5        15      2      0
-    ## 22      0      1       3        1        0        0         4      0      0
-    ## 23      1      0       7        2        3        6        14      2      3
-    ## 24      5      1       8        4        5       14        37      3      7
-    ## 25      2      4      10        4        4       11        34      6      4
-    ## 26      3      1       1        2        2        8        10      0      0
-    ## 27      1      3      10        6        3        9        27      3      3
-    ## 28      1      1       1        0        0        0         4      0      0
-    ## 29      1      2       4        1        2        7        15      2      3
-    ## 30      1      1       1        1        4        3        19      0      0
-    ## 31      2      1       6        0        1        4        27      5      3
-    ## 32      1      2       4        8        2        7        21      0      5
-    ## 33      5      2       6        1        2        4        30      4      2
-    ## 34      2      1       1        3        1        4        16      6      0
-    ## 35      1      1       4        0        0        4        12      3      3
-    ## 36      1      1       6        2        2        7        15      3      4
-    ## 37      0      1       2        1        2        1         7      1      0
-    ## 38      1      1       1        1        0        0         0      0      0
-    ## 39      1      0       1        0        1        2         5      0      0
-    ## 40      4      6       9        2        3        7        17      4      2
-    ## 41      0      0       1        0        0        2         3      0      0
-    ## 42      1      2       1        6        0        4        15      0      1
-    ## 43      1      1       4        0        1        4         2      2      0
-    ## 44      3      6       8        1        3        5        12      2      5
-    ## 45      1      0       1        0        0        0         2      0      1
-    ## 46      1      1       8        2        1        5        11      4      0
-    ## 47      1      1       3        3        0        1        10      2      2
-    ## 48      0      2       2        1        0        2         4      1      3
-    ## 49      1      1       1        1        2        4        10      2      0
-    ## 50      2      1       2        4        2        2         9      3      0
-    ## 51      1      1       1        1        0        0         0      0      0
-    ## 52      1      1       1        1        0        0         0      0      0
-    ## 53      0      1       0        1        0        2         4      0      0
-    ## 54      1      1       1        1        0        0         0      0      0
-    ## 55      1      1       1        1        0        0         0      0      0
-    ## 56      0      0       3        0        2        1         4      0      0
+\#\#4.1 sGISc Conference Poster
+
+This section refers to the results figures presented at the IGISc
+International Conference on Geospatial Information Sciences at
+CentroGeo, Mexico.
+
+### 4.1.1 Evaluation
+
+Section 2.1 introduce the target of the algorithm which is the base of
+an evaluation. The evaluation applies for the four variales of
+`Population totals`, `age-ranges and sex`, `assistance or not to
+school`, `actively economically or not (work)`. The results evaluation
+demonstrate that the algorithm target is fulfill considering the
+following criteria:
+
+  - `Comparing values between the observed census data of the totals by
+    locality per variable with the estimated values`
+
+| Observed totals by locality          | Estimated totals by locality     |
+| ------------------------------------ | -------------------------------- |
+| A known value of a targeted variable | Sum of estimated values by block |
+
+The bellow graph shows a comparison of observed and estimated totals by
+locality of the variables of interest.
+
+![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+
+  - `Comparing values between the observed census data of the totals by
+    locality per variable with the estimated values`
+
+e the algorithm performace a com verify how good is the population
+census estimation algorithm is presented as follows:
+
+| Targeted totals                              | Performance evaluation                                                      |
+| -------------------------------------------- | --------------------------------------------------------------------------- |
+| By column: Targeted variable of the locality | .                                                                           |
+| By row                                       | Making sure that the totals a block are not overestimated.                  |
+| By gender                                    | Consideration in the desagregation of the totals by gender (and their sum). |
+
+The variables selected represent the following categories:
+
+  - `Population totals`
+      - `Age-ranges and sex`
+      - `Assistance or not to school`
+      - `Actively economically or not (work)`
+
+The following statistics represent are the verification of results.
