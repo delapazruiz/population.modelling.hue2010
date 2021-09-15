@@ -37,7 +37,6 @@ After analyzing **`r paste(ncol(hpconsfull))`** census variables that exist at t
 ```{r echo=FALSE}
 colnames(hptotcons.observ)
 
-colnames(hpcons.estima)
 ```
 
 ## 1.2 `NA` Values
@@ -46,7 +45,7 @@ colnames(hpcons.estima)
 
 
 ```{r echo=FALSE}
-hpcons.orig[,7:15]
+kable(hpcons.orig[1:10,7:15])
 ```
 <br>
 
@@ -328,24 +327,26 @@ summary(hpcons1$mP_18A24)
 ggplot(hpcons1, aes(x = mP_18A24)) + geom_bar(fill = "blue")
 ```
 
-## 4.1 sGISc Conference Poster
+## 4.1 sGISc 2021 Conference Poster
 
 This section refers to the results figures presented at the IGISc International Conference on Geospatial Information Sciences at CentroGeo, Mexico.
 
 ### 4.1.1 Evaluation
 
-Section 2.1 introduce the target of the algorithm which is the base of an evaluation. The evaluation applies for the `age-ranges and gender`, `school`, and `work` related variables. The results evaluation demonstrate that the algorithm target is fulfilled considering the following criteria:
+Section 2.1 introduce the target of the algorithm which is the base to apply an evaluation. The evaluation applies for the `age-ranges and gender`, `school`, and `work` related variables. The variables are compared with their respective total values at the spatial units of locality and block.  The results evaluation demonstrate that the algorithm target is fulfilled considering the following two criteria:
 
-  * `1. Comparing values between the observed census data of the totals by         locality per variable with estimated values.`
+  * `1. Comparing values between the observed census data of the totals by locality per variable with estimated values.`
 
 Observed totals by locality  | Estimated totals by locality 
 ------------- | -------------
-Known value of a targeted variable  | Defined with the sum of estimated values of the many blocks that compound the target variables (sum by columns)
+Known value of a targeted variable  | Defined with the sum of estimated values of many blocks that compound the target variables (sum by columns)
 
 The bellow graph shows a comparison of observed and estimated totals by locality of the variables of interest.
 
 ```{r echo=FALSE, message=FALSE, resize.width= 14}
-full_join(
+
+
+variables.evaluation <-full_join(
   hpcons.estima %>% 
   map_df(sum)%>%
   pivot_longer(POBTOT.f:PE_INAC_F.f, 
@@ -357,7 +358,9 @@ full_join(
   pivot_longer(POBTOT:PE_INAC_F, 
                names_to = "census.variables", 
                values_to = "population.observed")
-  )%>%
+  )
+
+variables.evaluation %>%
   melt(id.vars = 'census.variables', variable.name = 'Population.Type', 
                        value.name = 'pupulation.number')%>%
   ggplot(aes(x = census.variables, 
@@ -368,16 +371,27 @@ full_join(
              ))+
   geom_point() + 
   scale_color_manual(values = c("population.observed" = 'red',
-                                'population.estimated' = 'black')) +
+                                'population.estimated' = '#88ca7f')) +
   scale_shape_manual(values = c('population.observed' = 3, 
                                 'population.estimated' = 20))+
   scale_size_manual(values = c('population.observed' = 2,
                         'population.estimated' = 6))+
   labs( x = "Targeted variables at the locality", 
         y = "Total population by variable",
-        title = "Evaluation of estimation algorithm")+ 
-  theme(axis.text.x = element_text(angle = 90, vjust = .1, hjust=.1))
-
+        title = "Evaluation of estimation algorithm",
+        caption = 
+        (paste("Correlation = ", 
+                  round((cor(as.numeric(as.matrix(
+                    variables.evaluation$population.observed)),
+                      as.numeric(as.matrix(
+                        variables.evaluation$population.estimated)))), digits=4)
+               )
+         )
+        )+ 
+  theme(axis.text.x = element_text(angle = 90, vjust = .1, hjust=.1))+
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 10))
+  #scale_x_continuous(breaks = scales::pretty_breaks(n = 10)) +
+  
 ```
 
 * `2. Comparing values between the observed census data of the totals by block per variable with estimated values.`
@@ -388,23 +402,38 @@ Known value of a targeted variable  | Defined with the sum of estimated values o
 
 The bellow graph shows a comparison of observed and estimated totals by block of the variables of interest.
 
-```{r echo=FALSE, message=FALSE, resize.width= 14}
-full_join(
-  hpcons.estima %>% 
-  map_df(sum)%>%
-  pivot_longer(POBTOT.f:PE_INAC_F.f, 
-               names_to = "census.variables", 
-               values_to = "population.estimated")%>% 
-  mutate(census.variables = as.character(gsub(".f", "", census.variables)))
-  ,
-  hptotcons.observ %>%
-  pivot_longer(POBTOT:PE_INAC_F, 
-               names_to = "census.variables", 
-               values_to = "population.observed")
-  )%>%
-  melt(id.vars = 'census.variables', variable.name = 'Population.Type', 
+```{r echo=FALSE, message=FALSE,}
+library("dplyr") # or library("tidyverse")
+
+#Sum variables equivalent to totals
+age.range.estimation<- as.data.frame(hpcons.estima$P_0A2.f+
+                                     hpcons.estima$P_3A5.f+
+                                     hpcons.estima$P_6A11.f+
+                                     hpcons.estima$P_12YMAS.f)
+ 
+colnames(age.range.estimation)<- c("population.estimated")
+
+#Add Block ID
+age.range.estimation <- age.range.estimation %>% mutate(Block.ID = row_number())
+
+
+#Select raw observed values
+age.range.observed <- as.data.frame(hpcons.orig$POBTOT)
+
+colnames(age.range.observed)<- c("population.observed")
+
+#Add Block ID
+age.range.observed <- age.range.observed %>% mutate(Block.ID = row_number())
+
+#Combine observation and estimation
+#head(age.range.observed)
+#head(age.range.estimation)
+
+#Data preparation and plot
+full_join(age.range.estimation, age.range.observed)%>%
+  melt(id.vars = 'Block.ID', variable.name = 'Population.Type', 
                        value.name = 'pupulation.number')%>%
-  ggplot(aes(x = census.variables, 
+  ggplot(aes(x = Block.ID, 
              y = pupulation.number, 
              shape = Population.Type, 
              color = Population.Type,
@@ -412,48 +441,48 @@ full_join(
              ))+
   geom_point() + 
   scale_color_manual(values = c("population.observed" = 'red',
-                                'population.estimated' = 'black')) +
+                                'population.estimated' = '#88ca7f')) +
   scale_shape_manual(values = c('population.observed' = 3, 
                                 'population.estimated' = 20))+
   scale_size_manual(values = c('population.observed' = 2,
                         'population.estimated' = 6))+
-  labs( x = "Targeted variables at the locality", 
-        y = "Total population by variable",
-        title = "Evaluation of estimation algorithm")+ 
-  theme(axis.text.x = element_text(angle = 90, vjust = .1, hjust=.1))
+  labs( x = "Block ID", 
+        y = "Total population by Block",
+        title = "Evaluation of estimation algorithm",
+        caption = 
+        (paste("Correlation = ", 
+                  round((cor(as.numeric(as.matrix(
+                    age.range.observed$population.observed)),
+                      as.numeric(as.matrix(
+                        age.range.estimation$population.estimated)))), digits=4)
+               )
+         )
+        )+ 
+  theme(axis.text.x = element_text(angle = 90, vjust = .1, hjust=.1))+
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 10)) +
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 10))
+```
+<br>
 
+The bellow table is a sample of filled NA values.
+
+```{r echo=FALSE}
+kable(hpcons.estima[1:10,7:15])
 ```
 
-```{r}
-(hpcons.estima$P_0A2.f+
- hpcons.estima$P_3A5.f+
- hpcons.estima$P_6A11.f+
- hpcons.estima$P_12YMAS.f) %>% as.data.frame()
-
-hpcons.orig$POBTOT
 
 
-join(
-  
-   (hpcons.estima$P_0A2.f+
-   hpcons.estima$P_3A5.f+
-   hpcons.estima$P_6A11.f+
-   hpcons.estima$P_12YMAS.f)%>%
-   as.data.frame()%>% colnames()%>% c("estimation")
-   
-   
-   %>% 
-   ),
-  (hpcons.orig$POBTOT%>% as.data.frame(col.names = "observation"))
-  )
 
-%>%
-  
-  
-colnames() <- c("observation")
-  
-  melt(id.vars = 'census.variables', variable.name = 'Population.Type', 
-                       value.name = 'pupulation.number')
-```
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -18,7 +18,7 @@ Author: Néstor de la Paz Ruíz
       - [2.3 Extra conditionals (M, F)](#23-extra-conditionals-m-f)
   - [3 Generic cleaning function](#3-generic-cleaning-function)
   - [4 Results](#4-results)
-      - [4.1.1 Evaluation](#411-evaluation)
+      - [4.1 sGISc Conference Poster](#41-sgisc-conference-poster)
 
 # 1\. Introduction
 
@@ -47,79 +47,24 @@ variables will be used to simulate the dynamics of the `mobility`,
     ## [36] "P15A17A_F"  "P18A24A"    "P18A24A_M"  "P18A24A_F"  "PEA"       
     ## [41] "PEA_M"      "PEA_F"      "PE_INAC"    "PE_INAC_M"  "PE_INAC_F"
 
-    ##  [1] "POBTOT.f"     "POBMAS.f"     "POBFEM.f"     "P_12YMAS.f"   "P_12YMAS_M.f"
-    ##  [6] "P_12YMAS_F.f" "P_0A2.f"      "P_0A2_M.f"    "P_0A2_F.f"    "P_3A5.f"     
-    ## [11] "P_3A5_M.f"    "P_3A5_F.f"    "P_6A11.f"     "P_6A11_M.f"   "P_6A11_F.f"  
-    ## [16] "P_12A14.f"    "P_12A14_M.f"  "P_12A14_F.f"  "P_15A17.f"    "P_15A17_M.f" 
-    ## [21] "P_15A17_F.f"  "P_18A24.f"    "P_18A24_M.f"  "P_18A24_F.f"  "P3A5_NOA.f"  
-    ## [26] "P3A5_NOA_M.f" "P3A5_NOA_F.f" "P6A11_NOA.f"  "P6A11_NOAM.f" "P6A11_NOAF.f"
-    ## [31] "P12A14NOA.f"  "P12A14NOAM.f" "P12A14NOAF.f" "P15A17A.f"    "P15A17A_M.f" 
-    ## [36] "P15A17A_F.f"  "P18A24A.f"    "P18A24A_M.f"  "P18A24A_F.f"  "PEA.f"       
-    ## [41] "PEA_M.f"      "PEA_F.f"      "PE_INAC.f"    "PE_INAC_M.f"  "PE_INAC_F.f"
-
 ## 1.2 `NA` Values
 
 *NA* cells exits as a mean of privacy protection. The raw data by block
 demonstrate presence of *NA* values equal to **829** cells. A preview of
 data missing due to privacy looks like the following:
 
-    ##    P_0A2 P_0A2_M P_0A2_F P_3A5 P_3A5_M P_3A5_F P_6A11 P_6A11_M P_6A11_F
-    ## 1      0       0       0    NA       0      NA     NA       NA        0
-    ## 2      4      NA      NA     4       3      NA      6        4       NA
-    ## 3      3      NA      NA     4       3      NA      6        3        3
-    ## 4     NA      NA       0    NA       0      NA      0        0        0
-    ## 5     NA       0      NA     0       0       0      8        5        3
-    ## 6     NA      NA       0    NA       0      NA     NA       NA        0
-    ## 7      7       3       4     3       3       0     12        4        8
-    ## 8     NA      NA       0    NA       0      NA      7        4        3
-    ## 9     NA      NA       0     7       4       3      8        5        3
-    ## 10     3      NA      NA    NA       0      NA      7        4        3
-    ## 11     4      NA       3    NA       0      NA      7        3        4
-    ## 12    NA      NA      NA    NA       0      NA      7        3        4
-    ## 13    NA      NA      NA    NA      NA      NA     NA       NA       NA
-    ## 14     0       0       0    NA      NA       0      4        3       NA
-    ## 15     0       0       0     0       0       0      4        3       NA
-    ## 16     0       0       0     0       0       0     NA        0       NA
-    ## 17     7       4       3    10       7       3     14        8        6
-    ## 18     0       0       0     3      NA      NA     NA       NA        0
-    ## 19    NA      NA       0     3      NA      NA      8        5        3
-    ## 20     5      NA       4     4      NA       3      5       NA        4
-    ## 21     3      NA      NA    NA      NA       0      5        3       NA
-    ## 22     0       0       0    NA      NA       0      4        3       NA
-    ## 23     3      NA      NA     3       0       3     10        7        3
-    ## 24     8       5       3     8      NA       7     21        8       13
-    ## 25     8      NA       6     8       4       4     21       10       11
-    ## 26     3       3       0    NA      NA      NA      4       NA        3
-    ## 27     4      NA      NA     6       3       3     19       10        9
-    ## 28    NA      NA       0    NA      NA      NA     NA       NA        0
-    ## 29     3      NA      NA     5      NA       3     11        4        7
-    ## 30    NA      NA       0    NA      NA       0      4       NA        3
-    ## 31     7      NA       5     4      NA       3      8        6       NA
-    ## 32    NA      NA       0     7      NA       5     14        4       10
-    ## 33     9       5       4     4      NA      NA     10        6        4
-    ## 34     8      NA       6    NA      NA      NA      3       NA       NA
-    ## 35     4      NA       3     4      NA       3      9        4        5
-    ## 36     4      NA      NA     5      NA       4     11        6        5
-    ## 37    NA       0      NA    NA      NA       0      5       NA        3
-    ## 38    NA      NA      NA    NA      NA      NA     NA       NA       NA
-    ## 39    NA      NA      NA     0       0       0      4       NA       NA
-    ## 40     8       4       4     8       6      NA     18        9        9
-    ## 41     0       0       0     0       0       0     NA       NA        0
-    ## 42    NA      NA       0     3      NA      NA      3       NA       NA
-    ## 43     3      NA      NA    NA      NA       0      5        4       NA
-    ## 44     5       3      NA    11       6       5     13        8        5
-    ## 45    NA      NA      NA    NA       0      NA     NA       NA        0
-    ## 46     5      NA       4    NA      NA      NA     14        8        6
-    ## 47     3      NA      NA     3      NA      NA      9        3        6
-    ## 48    NA       0      NA     5      NA       3      5       NA        3
-    ## 49     3      NA      NA    NA      NA       0      3       NA       NA
-    ## 50     5      NA       3    NA      NA      NA      6       NA        4
-    ## 51    NA      NA      NA    NA      NA      NA     NA       NA       NA
-    ## 52    NA      NA      NA    NA      NA      NA     NA       NA       NA
-    ## 53     0       0       0    NA      NA      NA      3        0        3
-    ## 54    NA      NA      NA    NA      NA      NA     NA       NA       NA
-    ## 55    NA      NA      NA    NA      NA      NA     NA       NA       NA
-    ## 56     0       0       0     0       0       0      4        3       NA
+| P\_0A2 | P\_0A2\_M | P\_0A2\_F | P\_3A5 | P\_3A5\_M | P\_3A5\_F | P\_6A11 | P\_6A11\_M | P\_6A11\_F |
+| -----: | --------: | --------: | -----: | --------: | --------: | ------: | ---------: | ---------: |
+|      0 |         0 |         0 |     NA |         0 |        NA |      NA |         NA |          0 |
+|      4 |        NA |        NA |      4 |         3 |        NA |       6 |          4 |         NA |
+|      3 |        NA |        NA |      4 |         3 |        NA |       6 |          3 |          3 |
+|     NA |        NA |         0 |     NA |         0 |        NA |       0 |          0 |          0 |
+|     NA |         0 |        NA |      0 |         0 |         0 |       8 |          5 |          3 |
+|     NA |        NA |         0 |     NA |         0 |        NA |      NA |         NA |          0 |
+|      7 |         3 |         4 |      3 |         3 |         0 |      12 |          4 |          8 |
+|     NA |        NA |         0 |     NA |         0 |        NA |       7 |          4 |          3 |
+|     NA |        NA |         0 |      7 |         4 |         3 |       8 |          5 |          3 |
+|      3 |        NA |        NA |     NA |         0 |        NA |       7 |          4 |          3 |
 
 <br>
 
@@ -524,7 +469,7 @@ Summary after cleaning `P_18A24_M` (eliminated `NA` values):
 
 ![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
-\#\#4.1 sGISc Conference Poster
+## 4.1 sGISc Conference Poster
 
 This section refers to the results figures presented at the IGISc
 International Conference on Geospatial Information Sciences at
@@ -532,42 +477,49 @@ CentroGeo, Mexico.
 
 ### 4.1.1 Evaluation
 
-Section 2.1 introduce the target of the algorithm which is the base of
-an evaluation. The evaluation applies for the four variales of
-`Population totals`, `age-ranges and sex`, `assistance or not to
-school`, `actively economically or not (work)`. The results evaluation
-demonstrate that the algorithm target is fulfill considering the
-following criteria:
+Section 2.1 introduce the target of the algorithm which is the base to
+apply an evaluation. The evaluation applies for the `age-ranges and
+gender`, `school`, and `work` related variables. The variables are
+compared with their respective total values at the spatial units of
+locality and block. The results evaluation demonstrate that the
+algorithm target is fulfilled considering the following two criteria:
 
-  - `Comparing values between the observed census data of the totals by
-    locality per variable with the estimated values`
+  - `1. Comparing values between the observed census data of the totals
+    by locality per variable with estimated values.`
 
-| Observed totals by locality          | Estimated totals by locality     |
-| ------------------------------------ | -------------------------------- |
-| A known value of a targeted variable | Sum of estimated values by block |
+| Observed totals by locality        | Estimated totals by locality                                                                                |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Known value of a targeted variable | Defined with the sum of estimated values of many blocks that compound the target variables (sum by columns) |
 
 The bellow graph shows a comparison of observed and estimated totals by
 locality of the variables of interest.
 
 ![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
-  - `Comparing values between the observed census data of the totals by
-    locality per variable with the estimated values`
+  - `2. Comparing values between the observed census data of the totals
+    by block per variable with estimated values.`
 
-e the algorithm performace a com verify how good is the population
-census estimation algorithm is presented as follows:
+| Observed totals by blocks          | Estimated totals by blocks                                                                               |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Known value of a targeted variable | Defined with the sum of estimated values of many blocks that compound the target variables (sum by rows) |
 
-| Targeted totals                              | Performance evaluation                                                      |
-| -------------------------------------------- | --------------------------------------------------------------------------- |
-| By column: Targeted variable of the locality | .                                                                           |
-| By row                                       | Making sure that the totals a block are not overestimated.                  |
-| By gender                                    | Consideration in the desagregation of the totals by gender (and their sum). |
+The bellow graph shows a comparison of observed and estimated totals by
+block of the variables of interest.
 
-The variables selected represent the following categories:
+![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+<br>
 
-  - `Population totals`
-      - `Age-ranges and sex`
-      - `Assistance or not to school`
-      - `Actively economically or not (work)`
+The bellow table is a sample of filled NA values.
 
-The following statistics represent are the verification of results.
+| P\_0A2.f | P\_0A2\_M.f | P\_0A2\_F.f | P\_3A5.f | P\_3A5\_M.f | P\_3A5\_F.f | P\_6A11.f | P\_6A11\_M.f | P\_6A11\_F.f |
+| -------: | ----------: | ----------: | -------: | ----------: | ----------: | --------: | -----------: | -----------: |
+|        0 |           0 |           0 |        2 |           0 |           2 |         2 |            2 |            0 |
+|        4 |           2 |           2 |        4 |           3 |           1 |         6 |            4 |            2 |
+|        3 |           1 |           2 |        4 |           3 |           1 |         6 |            3 |            3 |
+|        2 |           2 |           0 |        2 |           0 |           2 |         0 |            0 |            0 |
+|        2 |           0 |           2 |        0 |           0 |           0 |         8 |            5 |            3 |
+|        2 |           2 |           0 |        2 |           0 |           2 |         2 |            2 |            0 |
+|        7 |           3 |           4 |        3 |           3 |           0 |        12 |            4 |            8 |
+|        2 |           2 |           0 |        2 |           0 |           2 |         7 |            4 |            3 |
+|        2 |           2 |           0 |        7 |           4 |           3 |         8 |            5 |            3 |
+|        3 |           1 |           2 |        2 |           0 |           2 |         7 |            4 |            3 |
