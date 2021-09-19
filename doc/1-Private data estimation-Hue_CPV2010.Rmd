@@ -17,8 +17,65 @@ library(dplyr)
 library(reshape2)
 library(tidyr)
 library(purrr)
+library(readxl)
+library(Rcpp)
+
 #Data
-load(file = "C:/1.population.modelling/population.modelling/results/data/preparing.census.data.for.sms.RData")
+#load(file = "C:/1.population.modelling/population.modelling/results/data/preparing.census.data.for.sms.RData")
+
+hpconsfull <- read_excel("C:/1.population.modelling/population.modelling/data/RESAGEBURB_13XLS10.xls", na = "*") %>% filter(NOM_LOC == "Huehuetla")
+
+# Filter targeted variables
+hpcons.orig  <- hpconsfull %>% 
+  select( 
+   POBTOT, POBMAS, POBFEM,
+   P_12YMAS, P_12YMAS_M, P_12YMAS_F,
+   P_0A2, P_0A2_M, P_0A2_F, 
+   P_3A5, P_3A5_M, P_3A5_F,
+   P_6A11, P_6A11_M, P_6A11_F,
+   P_12A14, P_12A14_M, P_12A14_F,
+   P_15A17, P_15A17_M, P_15A17_F,
+   P_18A24, P_18A24_M, P_18A24_F,
+   P3A5_NOA, P3A5_NOA_M, P3A5_NOA_F,
+   P6A11_NOA, P6A11_NOAM, P6A11_NOAF,
+   P12A14NOA, P12A14NOAM, P12A14NOAF,
+   P18A24A, P18A24A_M, P18A24A_F,
+   P15A17A, P15A17A_M, P15A17A_F,
+   PEA, PEA_M, PEA_F,
+   PE_INAC, PE_INAC_M, PE_INAC_F
+   ) %>% lapply(as.integer)%>% as.data.frame()
+
+#By locality
+hptotcons <- read_excel("C:/1.population.modelling/population.modelling/data/ITER_13XLS10.xls", na = "*") %>% filter(NOM_LOC == "Huehuetla", LOC == "0001")
+
+hptotcons <- hptotcons %>%
+  select( 
+   POBTOT, POBMAS, POBFEM,
+   P_12YMAS, P_12YMAS_M, P_12YMAS_F,
+   P_0A2, P_0A2_M, P_0A2_F, 
+   P_3A5, P_3A5_M, P_3A5_F,
+   P_6A11, P_6A11_M, P_6A11_F,
+   P_12A14, P_12A14_M, P_12A14_F,
+   P_15A17, P_15A17_M, P_15A17_F,
+   P_18A24, P_18A24_M, P_18A24_F,
+   P3A5_NOA, P3A5_NOA_M, P3A5_NOA_F,
+   P6A11_NOA, P6A11_NOAM, P6A11_NOAF,
+   P12A14NOA, P12A14NOAM, P12A14NOAF,
+   P18A24A, P18A24A_M, P18A24A_F,
+   P15A17A, P15A17A_M, P15A17A_F,
+   PEA, PEA_M, PEA_F,
+   PE_INAC, PE_INAC_M, PE_INAC_F
+   ) %>% lapply(as.integer)%>% as.data.frame()
+
+#hptotcons[which(is.na(hptotcons))]
+#hptotcons[,c(51,52,53,54)]
+
+hpcons <- hpcons.orig
+source("C:/1.population.modelling/population.modelling/code/02-Huehuetla_CPV2010_Data privacy algorithm.R") 
+sum(hpcons1)
+sum(hpcons2)
+sum(hpcons3)
+
 ```
 
 

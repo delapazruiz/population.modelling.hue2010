@@ -18,7 +18,8 @@ Author: Néstor de la Paz Ruíz
       - [2.3 Extra conditionals (M, F)](#23-extra-conditionals-m-f)
   - [3 Generic cleaning function](#3-generic-cleaning-function)
   - [4 Results](#4-results)
-      - [4.1 sGISc Conference Poster](#41-sgisc-conference-poster)
+      - [4.1 sGISc 2021 Conference
+        Poster](#41-sgisc-2021-conference-poster)
 
 # 1\. Introduction
 
@@ -58,13 +59,13 @@ data missing due to privacy looks like the following:
 |      0 |         0 |         0 |     NA |         0 |        NA |      NA |         NA |          0 |
 |      4 |        NA |        NA |      4 |         3 |        NA |       6 |          4 |         NA |
 |      3 |        NA |        NA |      4 |         3 |        NA |       6 |          3 |          3 |
+|      0 |         0 |         0 |      0 |         0 |         0 |       0 |          0 |          0 |
 |     NA |        NA |         0 |     NA |         0 |        NA |       0 |          0 |          0 |
 |     NA |         0 |        NA |      0 |         0 |         0 |       8 |          5 |          3 |
 |     NA |        NA |         0 |     NA |         0 |        NA |      NA |         NA |          0 |
 |      7 |         3 |         4 |      3 |         3 |         0 |      12 |          4 |          8 |
 |     NA |        NA |         0 |     NA |         0 |        NA |       7 |          4 |          3 |
 |     NA |        NA |         0 |      7 |         4 |         3 |       8 |          5 |          3 |
-|      3 |        NA |        NA |     NA |         0 |        NA |       7 |          4 |          3 |
 
 <br>
 
@@ -229,20 +230,20 @@ e.g;`P_18A25`, `P_18A25_M`, `P_18A25_F`. The total table (`t.tot`)
 consist of one row, and number of columns equal to the categorical
 variables. Example of the data tables:
 
-| P\_18A24 | P\_18A24\_M | P\_18A24\_F |
-| -------: | ----------: | ----------: |
-|      406 |         199 |         207 |
+| P15A17A | P15A17A\_M | P15A17A\_F |
+| ------: | ---------: | ---------: |
+|     136 |         59 |         77 |
 
 Section of `t.tot` with the totals by a categorical variable (columns):
 
-| P\_18A24 | P\_18A24\_M | P\_18A24\_F |
-| -------: | ----------: | ----------: |
-|       NA |          NA |          NA |
-|       10 |           4 |           6 |
-|        8 |           5 |           3 |
-|        4 |          NA |           3 |
-|        4 |           3 |          NA |
-|       10 |          NA |           8 |
+| P15A17A | P15A17A\_M | P15A17A\_F |
+| ------: | ---------: | ---------: |
+|       0 |          0 |          0 |
+|      NA |          0 |         NA |
+|      NA |         NA |          0 |
+|       0 |          0 |          0 |
+|       0 |          0 |          0 |
+|       4 |          0 |          4 |
 
 Section of the `variable table` with NA values for a categorical
 variable (block data):
@@ -326,24 +327,24 @@ from the same blocks.
 | 1 |     13 |      5 |      8 |
 | 2 |     64 |     31 |     33 |
 | 3 |     60 |     29 |     31 |
-| 4 |     24 |      8 |     16 |
-| 5 |     36 |     17 |     19 |
-| 6 |     39 |     17 |     22 |
-| 7 |    109 |     52 |     57 |
+| 4 |      0 |      0 |      0 |
+| 5 |     24 |      8 |     16 |
+| 6 |     36 |     17 |     19 |
+| 7 |     39 |     17 |     22 |
 
 </td>
 
 <td>
 
-|   | P\_18A24 | P\_18A24\_M | P\_18A24\_F |
-| :- | -------: | ----------: | ----------: |
-| 1 |       NA |          NA |          NA |
-| 2 |       10 |           4 |           6 |
-| 3 |        8 |           5 |           3 |
-| 4 |        4 |          NA |           3 |
-| 5 |        4 |           3 |          NA |
-| 6 |       10 |          NA |           8 |
-| 7 |       16 |           8 |           8 |
+|   | P15A17A | P15A17A\_M | P15A17A\_F |
+| :- | ------: | ---------: | ---------: |
+| 1 |       0 |          0 |          0 |
+| 2 |      NA |          0 |         NA |
+| 3 |      NA |         NA |          0 |
+| 4 |       0 |          0 |          0 |
+| 5 |       0 |          0 |          0 |
+| 6 |       4 |          0 |          4 |
+| 7 |      NA |          0 |         NA |
 
 </td>
 
@@ -448,28 +449,28 @@ totals of columns, and rows.
 Here is a summary before data cleaning for the variable `P_18A24_F`:
 
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-    ##   0.000   3.000   5.000   5.286   6.500  16.000      21
+    ##   0.000   3.000   4.000   4.405   6.000  16.000      21
 
 Summary after cleaning `P_18A24_F` (eliminated `NA` values):
 
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    ##   0.000   1.000   3.000   3.696   6.000  16.000
+    ##   0.000   0.000   3.000   3.286   5.500  16.000
 
 ![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 Here is a summary before data cleaning for the variable `P_18A24_M`:
 
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-    ##   0.000   3.500   5.000   4.886   7.000  14.000      21
+    ##   0.000   0.000   4.000   4.071   6.000  14.000      21
 
 Summary after cleaning `P_18A24_M` (eliminated `NA` values):
 
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    ##   0.000   1.000   3.000   3.554   5.000  14.000
+    ##   0.000   0.000   3.000   3.159   5.000  14.000
 
 ![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
-## 4.1 sGISc Conference Poster
+## 4.1 sGISc 2021 Conference Poster
 
 This section refers to the results figures presented at the IGISc
 International Conference on Geospatial Information Sciences at
@@ -516,10 +517,10 @@ The bellow table is a sample of filled NA values.
 |        0 |           0 |           0 |        2 |           0 |           2 |         2 |            2 |            0 |
 |        4 |           2 |           2 |        4 |           3 |           1 |         6 |            4 |            2 |
 |        3 |           1 |           2 |        4 |           3 |           1 |         6 |            3 |            3 |
+|        0 |           0 |           0 |        0 |           0 |           0 |         0 |            0 |            0 |
 |        2 |           2 |           0 |        2 |           0 |           2 |         0 |            0 |            0 |
 |        2 |           0 |           2 |        0 |           0 |           0 |         8 |            5 |            3 |
 |        2 |           2 |           0 |        2 |           0 |           2 |         2 |            2 |            0 |
 |        7 |           3 |           4 |        3 |           3 |           0 |        12 |            4 |            8 |
 |        2 |           2 |           0 |        2 |           0 |           2 |         7 |            4 |            3 |
 |        2 |           2 |           0 |        7 |           4 |           3 |         8 |            5 |            3 |
-|        3 |           1 |           2 |        2 |           0 |           2 |         7 |            4 |            3 |

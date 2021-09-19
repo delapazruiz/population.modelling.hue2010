@@ -37,3 +37,8 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+#Heavy files / Original Census data
+
+data/RESAGEBURB_13XLS10.xls
+data/ITER_13XLS10.xls
