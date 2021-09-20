@@ -85,9 +85,19 @@ sum(hpcons3)
 
 This document shows the steps taken for preparing the census data for SMS. Census data related to `age-ranges, sex, school, and work` allows the estimations of DWW pollutants (production and location) depending on population characteristics. 
 
+## 1.1 Problem
 
-## 1.1 Variables selected
+Data privacy policies protect inhabitants' sensitive information and make population census data difficult to use in research activities. Especially, privacy policies make data partly inaccessible at small spatial units such as neighborhoods blocks with low population density.
 
+Spatial Microsimulation (SMS) refers to “the creation, analysis and modelling of individual level data allocated to geographic zones” (Lovelace, 2018).  Entirely census data at blocks is required for implementing SMS to better investigate population behavioural dynamics in complex phenomena's as mobility, security, pollution, or health.
+
+
+## 1.2 Objective
+
+Develop a method to estimate inaccessible population census data to enable more complex applications such as SMS.
+
+
+## 1.3 Variables selected
 
 After analyzing **`r paste(ncol(hpconsfull))`** census variables that exist at the block level, **`r paste(ncol(hpcons.orig))`** were required in the phase of `cleaning and transformation` to execute SMS and to provide input data for the DWW ABM. The selected variables will be used to simulate the dynamics of the `mobility`, `biological`, and `social` behaviors as `ABM's submodels`.
 
@@ -96,7 +106,7 @@ colnames(hptotcons.observ)
 
 ```
 
-## 1.2 `NA` Values
+## 1.4 `NA` Values
 
 *NA* cells exits as a mean of privacy protection. The raw data by block demonstrate presence of *NA* values equal to **`r paste((sum(is.na(hpcons.orig))))`** cells. A preview of data missing due to privacy looks like the following:
 
@@ -106,7 +116,7 @@ kable(hpcons.orig[1:10,7:15])
 ```
 <br>
 
-## 1.3 `NA` Confidentiality criteria
+## 1.5 `NA` Confidentiality criteria
 
 The main confidentiality criteria defined by the *Ley del Sistema Nacional de Información Estadística y Geográfica (LSNIEG)* are the following (INEGI,2020):
 
@@ -526,6 +536,17 @@ The bellow table is a sample of filled NA values.
 ```{r echo=FALSE}
 kable(hpcons.estima[1:10,7:15])
 ```
+
+### 4.1.2 Conclusion
+
+  * `Results demonstrate that the algorithm can estimate inaccessible census data at small spatial units with low population density.` 
+  * `The proposed algorithmic method enables the implementation of more complex applications.`
+  * `As future research, it will be simulated a complex problem of pollution.`
+
+
+
+
+
 
 
 

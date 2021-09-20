@@ -3,10 +3,12 @@ Census private data estimation
 Author: Néstor de la Paz Ruíz
 
   - [1. Introduction](#1-introduction)
-      - [1.1 Variables selected](#11-variables-selected)
-      - [1.2 `NA` Values](#12-na-values)
-      - [1.3 `NA` Confidentiality
-        criteria](#13-na-confidentiality-criteria)
+      - [1.1 Problem](#11-problem)
+      - [1.2 Objective](#12-objective)
+      - [1.3 Variables selected](#13-variables-selected)
+      - [1.4 `NA` Values](#14-na-values)
+      - [1.5 `NA` Confidentiality
+        criteria](#15-na-confidentiality-criteria)
   - [2 *R script* rules](#2-r-script-rules)
       - [2.1 Functions to fill `NA` cells at each categorical
         variable.](#21-functions-to-fill-na-cells-at-each-categorical-variable)
@@ -30,7 +32,25 @@ SMS. Census data related to `age-ranges, sex, school, and work` allows
 the estimations of DWW pollutants (production and location) depending on
 population characteristics.
 
-## 1.1 Variables selected
+## 1.1 Problem
+
+Data privacy policies protect inhabitants’ sensitive information and
+make population census data difficult to use in research activities.
+Especially, privacy policies make data partly inaccessible at small
+spatial units such as neighborhoods blocks with low population density.
+
+Spatial Microsimulation (SMS) refers to “the creation, analysis and
+modelling of individual level data allocated to geographic zones”
+(Lovelace, 2018). Entirely census data at blocks is required for
+implementing SMS to better investigate population behavioural dynamics
+in complex phenomena’s as mobility, security, pollution, or health.
+
+## 1.2 Objective
+
+Develop a method to estimate inaccessible population census data to
+enable more complex applications such as SMS.
+
+## 1.3 Variables selected
 
 After analyzing **198** census variables that exist at the block level,
 **45** were required in the phase of `cleaning and transformation` to
@@ -48,7 +68,7 @@ variables will be used to simulate the dynamics of the `mobility`,
     ## [36] "P15A17A_F"  "P18A24A"    "P18A24A_M"  "P18A24A_F"  "PEA"       
     ## [41] "PEA_M"      "PEA_F"      "PE_INAC"    "PE_INAC_M"  "PE_INAC_F"
 
-## 1.2 `NA` Values
+## 1.4 `NA` Values
 
 *NA* cells exits as a mean of privacy protection. The raw data by block
 demonstrate presence of *NA* values equal to **829** cells. A preview of
@@ -69,7 +89,7 @@ data missing due to privacy looks like the following:
 
 <br>
 
-## 1.3 `NA` Confidentiality criteria
+## 1.5 `NA` Confidentiality criteria
 
 The main confidentiality criteria defined by the *Ley del Sistema
 Nacional de Información Estadística y Geográfica (LSNIEG)* are the
@@ -524,3 +544,12 @@ The bellow table is a sample of filled NA values.
 |        7 |           3 |           4 |        3 |           3 |           0 |        12 |            4 |            8 |
 |        2 |           2 |           0 |        2 |           0 |           2 |         7 |            4 |            3 |
 |        2 |           2 |           0 |        7 |           4 |           3 |         8 |            5 |            3 |
+
+### 4.1.2 Conclusion
+
+  - `Results demonstrate that the algorithm can estimate inaccessible
+    census data at small spatial units with low population density.`
+      - `The proposed algorithmic method enables the implementation of
+        more complex applications.`
+      - `As future research, it will be simulated a complex problem of
+        pollution.`
