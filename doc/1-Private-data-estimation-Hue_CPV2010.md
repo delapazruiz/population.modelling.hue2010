@@ -547,9 +547,11 @@ The bellow table is a sample of filled NA values.
 
 ### 4.1.2 Conclusion
 
-  - `Results demonstrate that the algorithm can estimate inaccessible
-    census data at small spatial units with low population density.`
-      - `The proposed algorithmic method enables the implementation of
-        more complex applications.`
-      - `As future research, it will be simulated a complex problem of
-        pollution.`
+  - Results demonstrate that the algorithm can estimate inaccessible
+    census data at small spatial units with low population density.
+
+  - The proposed algorithmic method enables the implementation of more
+    complex applications.
+
+  - As future research, it will be simulated a complex problem of
+    pollution.
