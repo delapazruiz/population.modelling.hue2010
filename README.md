@@ -476,7 +476,7 @@ Summary after cleaning `P_18A24_F` (eliminated `NA` values):
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     ##   0.000   0.000   3.000   3.286   5.500  16.000
 
-![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](doc/1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 Here is a summary before data cleaning for the variable `P_18A24_M`:
 
@@ -488,7 +488,7 @@ Summary after cleaning `P_18A24_M` (eliminated `NA` values):
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     ##   0.000   0.000   3.000   3.159   5.000  14.000
 
-![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![](doc/1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
 ## 4.1 sGISc 2021 Conference Poster
 
@@ -515,7 +515,7 @@ algorithm target is fulfilled considering the following two criteria:
 The bellow graph shows a comparison of observed and estimated totals by
 locality of the variables of interest.
 
-![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+![](doc/1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
   - `2. Comparing values between the observed census data of the totals
     by block per variable with estimated values.`
@@ -527,7 +527,7 @@ locality of the variables of interest.
 The bellow graph shows a comparison of observed and estimated totals by
 block of the variables of interest.
 
-![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+![](doc/1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 <br>
 
 The bellow table is a sample of filled NA values.

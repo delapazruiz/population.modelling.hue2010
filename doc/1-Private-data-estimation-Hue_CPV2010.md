@@ -488,7 +488,7 @@ Summary after cleaning `P_18A24_M` (eliminated `NA` values):
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     ##   0.000   0.000   3.000   3.159   5.000  14.000
 
-![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![](/1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
 ## 4.1 sGISc 2021 Conference Poster
 
