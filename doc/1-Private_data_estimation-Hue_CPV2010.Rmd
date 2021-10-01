@@ -2,7 +2,7 @@
 title: "Census private data estimation"
 author: 'Author: Néstor de la Paz Ruíz'
 output:
-  github_document:
+  html_document:
     toc: yes
     toc_depth: 2
 ---
@@ -23,7 +23,7 @@ library(Rcpp)
 #Data
 #load(file = "C:/1.population.modelling/population.modelling/results/data/preparing.census.data.for.sms.RData")
 
-hpconsfull <- read_excel("C:/1.population.modelling/population.modelling/data/RESAGEBURB_13XLS10.xls", na = "*") %>% filter(NOM_LOC == "Huehuetla")
+hpconsfull <- read_excel("../data/RESAGEBURB_13XLS10.xls", na = "*") %>% filter(NOM_LOC == "Huehuetla")
 
 # Filter targeted variables
 hpcons.orig  <- hpconsfull %>% 
@@ -46,7 +46,7 @@ hpcons.orig  <- hpconsfull %>%
    ) %>% lapply(as.integer)%>% as.data.frame()
 
 #By locality
-hptotcons <- read_excel("C:/1.population.modelling/population.modelling/data/ITER_13XLS10.xls", na = "*") %>% filter(NOM_LOC == "Huehuetla", LOC == "0001")
+hptotcons <- read_excel("../data/ITER_13XLS10.xls", na = "*") %>% filter(NOM_LOC == "Huehuetla", LOC == "0001")
 
 hptotcons <- hptotcons %>%
   select( 
@@ -71,7 +71,7 @@ hptotcons <- hptotcons %>%
 #hptotcons[,c(51,52,53,54)]
 
 hpcons <- hpcons.orig
-source("C:/1.population.modelling/population.modelling/code/02-Huehuetla_CPV2010_Data privacy algorithm.R") 
+source("../code/02-Huehuetla_CPV2010_Data privacy_algorithm.R") 
 sum(hpcons1)
 sum(hpcons2)
 sum(hpcons3)

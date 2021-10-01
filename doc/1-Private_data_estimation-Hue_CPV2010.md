@@ -2,28 +2,28 @@ Census private data estimation
 ================
 Author: Néstor de la Paz Ruíz
 
-  - [1. Introduction](#1-introduction)
-      - [1.1 Problem](#11-problem)
-      - [1.2 Objective](#12-objective)
-      - [1.3 Variables selected](#13-variables-selected)
-      - [1.4 `NA` Values](#14-na-values)
-      - [1.5 `NA` Confidentiality
+-   [1. Introduction](#1-introduction)
+    -   [1.1 Problem](#11-problem)
+    -   [1.2 Objective](#12-objective)
+    -   [1.3 Variables selected](#13-variables-selected)
+    -   [1.4 `NA` Values](#14-na-values)
+    -   [1.5 `NA` Confidentiality
         criteria](#15-na-confidentiality-criteria)
-  - [2 *R script* rules](#2-r-script-rules)
-      - [2.1 Functions to fill `NA` cells at each categorical
+-   [2 *R script* rules](#2-r-script-rules)
+    -   [2.1 Functions to fill `NA` cells at each categorical
         variable.](#21-functions-to-fill-na-cells-at-each-categorical-variable)
-      - [2.2 Columns(`smcol_`) Targets the consistency in the totals by
+    -   [2.2 Columns(`smcol_`) Targets the consistency in the totals by
         categorical
         variable.](#22-columnssmcol_-targets-the-consistency-in-the-totals-by-categorical-variable)
-      - [2.3 Rows (`smrow_`): Consistency in the totals by
+    -   [2.3 Rows (`smrow_`): Consistency in the totals by
         block.](#23-rows-smrow_-consistency-in-the-totals-by-block)
-      - [2.3 Extra conditionals (M, F)](#23-extra-conditionals-m-f)
-  - [3 Generic cleaning function](#3-generic-cleaning-function)
-  - [4 Results](#4-results)
-      - [4.1 sGISc 2021 Conference
+    -   [2.3 Extra conditionals (M, F)](#23-extra-conditionals-m-f)
+-   [3 Generic cleaning function](#3-generic-cleaning-function)
+-   [4 Results](#4-results)
+    -   [4.1 sGISc 2021 Conference
         Poster](#41-sgisc-2021-conference-poster)
 
-# 1\. Introduction
+# 1. Introduction
 
 **Enabling SMS with the estimation of block census private data**
 
@@ -75,7 +75,7 @@ demonstrate presence of *NA* values equal to **829** cells. A preview of
 data missing due to privacy looks like the following:
 
 | P\_0A2 | P\_0A2\_M | P\_0A2\_F | P\_3A5 | P\_3A5\_M | P\_3A5\_F | P\_6A11 | P\_6A11\_M | P\_6A11\_F |
-| -----: | --------: | --------: | -----: | --------: | --------: | ------: | ---------: | ---------: |
+|-------:|----------:|----------:|-------:|----------:|----------:|--------:|-----------:|-----------:|
 |      0 |         0 |         0 |     NA |         0 |        NA |      NA |         NA |          0 |
 |      4 |        NA |        NA |      4 |         3 |        NA |       6 |          4 |         NA |
 |      3 |        NA |        NA |      4 |         3 |        NA |       6 |          3 |          3 |
@@ -96,7 +96,7 @@ Nacional de Información Estadística y Geográfica (LSNIEG)* are the
 following (INEGI,2020):
 
     • At the municipality or territorial demarcation level, locality and AGEB, any indicator with less than three units appears with an asterisk with the exception of the variables Total population (POBTOT), Total dwellings (VIVTOT) and Total inhabited dwellings (TVIVHAB).
-    
+
     • At the block level, the previous criterion also applies; additionally, for those with one or two inhabited dwellings, only presents information in the variables Total population (POBTOT) and Total dwellings (VIVTOT), in the rest of the indicators appear asterisks.
 
 The above criteria is considered to fill NA cells. Note that in this
@@ -117,17 +117,17 @@ As a general overview, `NA` cells are filled with a number of population
 that matches the totals:
 
 | Targeted totals | Description                                                                 |
-| --------------- | --------------------------------------------------------------------------- |
+|-----------------|-----------------------------------------------------------------------------|
 | By column       | Representing the totals of the categorical values.                          |
 | By row          | Making sure that the totals a block are not overestimated.                  |
 | By gender       | Consideration in the desagregation of the totals by gender (and their sum). |
 
 The variables selected represent the following categories:
 
-  - `Population totals`
-  - `Age-ranges and sex`
-  - `Assistance or not to school`
-  - `Actively economically or not (work)`
+-   `Population totals`
+-   `Age-ranges and sex`
+-   `Assistance or not to school`
+-   `Actively economically or not (work)`
 
 Each category requires its own script for data cleaning and
 transformation. This document explains the categorical variable
@@ -142,7 +142,7 @@ The following script take a glance of the core rules for cleaning
     To interpret the code it is relevant to note the following terminology:
 
 | Notation in the script       | Description                                                               |
-| ---------------------------- | ------------------------------------------------------------------------- |
+|------------------------------|---------------------------------------------------------------------------|
 | `smcol_, smrow_`             | Built functions to sum rows-columns across the categorical variable.      |
 | `_mf, _m, _f`                | Endings that refer at each section of a function by gender.               |
 | `.mf, .m, .f`                | If contained, it refers at each variable by its gender.                   |
@@ -224,10 +224,10 @@ sections, 1. Sum of male and female, 2. Male, 3. Female. All categorical
 variables are disaggregated by gender, and the structure of their
 functions follows the same structure.
 
-It can be noted that for the three sections, the script of `Male +
-Female` is repeated for `Male` and `Female` except that some additions
-are required depending on the gender column. For that reason the
-explanation of the `Male + Female` code in the following section is
+It can be noted that for the three sections, the script of
+`Male + Female` is repeated for `Male` and `Female` except that some
+additions are required depending on the gender column. For that reason
+the explanation of the `Male + Female` code in the following section is
 enough to understand the rest of the code.
 
 It is relevant to mention that the order to execute the code is
@@ -251,13 +251,13 @@ consist of one row, and number of columns equal to the categorical
 variables. Example of the data tables:
 
 | P15A17A | P15A17A\_M | P15A17A\_F |
-| ------: | ---------: | ---------: |
+|--------:|-----------:|-----------:|
 |     136 |         59 |         77 |
 
 Section of `t.tot` with the totals by a categorical variable (columns):
 
 | P15A17A | P15A17A\_M | P15A17A\_F |
-| ------: | ---------: | ---------: |
+|--------:|-----------:|-----------:|
 |       0 |          0 |          0 |
 |      NA |          0 |         NA |
 |      NA |         NA |          0 |
@@ -283,7 +283,7 @@ Female:   while (t.tot.f > smcol_f(i)), vec.f.n[i] <- vec.f.n[i]+1
 ```
 
 | Where:       | Description                                                     |
-| ------------ | --------------------------------------------------------------- |
+|--------------|-----------------------------------------------------------------|
 | `t.tot`      | Population totals of the categorical variable.                  |
 | `smcol(i)`   | Sum of column values of the variable in the cell iteration `i`. |
 | `vec.n`      | New vector value in the cell `i` that replace the `NA`.         |
@@ -327,51 +327,41 @@ In each block (rows), totals by gender are provided for locality, which
 can be appreciated in the following table:
 
 <table class="kable_wrapper">
-
 <caption>
-
 `POBTOT` table with blocks 1 to 7, and `variable table` with a
 categorical variable (P\_18A24) showing `missing population`NA\` cells
 from the same blocks.
-
 </caption>
-
 <tbody>
-
 <tr>
-
 <td>
 
-|   | POBTOT | POBMAS | POBFEM |
-| :- | -----: | -----: | -----: |
-| 1 |     13 |      5 |      8 |
-| 2 |     64 |     31 |     33 |
-| 3 |     60 |     29 |     31 |
-| 4 |      0 |      0 |      0 |
-| 5 |     24 |      8 |     16 |
-| 6 |     36 |     17 |     19 |
-| 7 |     39 |     17 |     22 |
+|     | POBTOT | POBMAS | POBFEM |
+|:----|-------:|-------:|-------:|
+| 1   |     13 |      5 |      8 |
+| 2   |     64 |     31 |     33 |
+| 3   |     60 |     29 |     31 |
+| 4   |      0 |      0 |      0 |
+| 5   |     24 |      8 |     16 |
+| 6   |     36 |     17 |     19 |
+| 7   |     39 |     17 |     22 |
 
 </td>
-
 <td>
 
-|   | P15A17A | P15A17A\_M | P15A17A\_F |
-| :- | ------: | ---------: | ---------: |
-| 1 |       0 |          0 |          0 |
-| 2 |      NA |          0 |         NA |
-| 3 |      NA |         NA |          0 |
-| 4 |       0 |          0 |          0 |
-| 5 |       0 |          0 |          0 |
-| 6 |       4 |          0 |          4 |
-| 7 |      NA |          0 |         NA |
+|     | P15A17A | P15A17A\_M | P15A17A\_F |
+|:----|--------:|-----------:|-----------:|
+| 1   |       0 |          0 |          0 |
+| 2   |      NA |          0 |         NA |
+| 3   |      NA |         NA |          0 |
+| 4   |       0 |          0 |          0 |
+| 5   |       0 |          0 |          0 |
+| 6   |       4 |          0 |          4 |
+| 7   |      NA |          0 |         NA |
 
 </td>
-
 </tr>
-
 </tbody>
-
 </table>
 
 ### The `block` conditional
@@ -384,13 +374,13 @@ rows that belongs to the targeted categorical variables which sum
 matches the total population in the block. The rules are the following:
 
 | Gender      | Function                    |
-| ----------- | --------------------------- |
+|-------------|-----------------------------|
 | Male+female | `(POBTOT[i] > smrow_mf(i))` |
 | Male        | `(POBMAS[i] > smrow_m(i))`  |
 | Female      | `(POBFEM[i] > smrow_f(i))`  |
 
 | Where                    | Description                                                                                     |
-| ------------------------ | ----------------------------------------------------------------------------------------------- |
+|--------------------------|-------------------------------------------------------------------------------------------------|
 | `POBTOT, POBMAS, POBFEM` | Total population, total males and females.                                                      |
 | `smrow_`                 | Function that sums all rows of the categorical variables at the iteration cell based on gender. |
 
@@ -441,8 +431,8 @@ The following code solves that issue.
 # 3 Generic cleaning function
 
 Finally, the declaration of the generic function that was built to clean
-the data for all the columns of the categorical variables `Age-ranges
-and sex` is declared as follows:
+the data for all the columns of the categorical variables
+`Age-ranges and sex` is declared as follows:
 
 ``` r
 clean.pvar <- function( = hpcons$P_12YMAS,
@@ -476,7 +466,7 @@ Summary after cleaning `P_18A24_F` (eliminated `NA` values):
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     ##   0.000   0.000   3.000   3.286   5.500  16.000
 
-![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](1-Private_data_estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 Here is a summary before data cleaning for the variable `P_18A24_M`:
 
@@ -488,7 +478,7 @@ Summary after cleaning `P_18A24_M` (eliminated `NA` values):
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     ##   0.000   0.000   3.000   3.159   5.000  14.000
 
-![](/1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![](1-Private_data_estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
 ## 4.1 sGISc 2021 Conference Poster
 
@@ -499,41 +489,39 @@ CentroGeo, Mexico.
 ### 4.1.1 Evaluation
 
 Section 2.1 introduce the target of the algorithm which is the base to
-apply an evaluation. The evaluation applies for the `age-ranges and
-gender`, `school`, and `work` related variables. The variables are
-compared with their respective total values at the spatial units of
-locality and block. The results evaluation demonstrate that the
+apply an evaluation. The evaluation applies for the
+`age-ranges and gender`, `school`, and `work` related variables. The
+variables are compared with their respective total values at the spatial
+units of locality and block. The results evaluation demonstrate that the
 algorithm target is fulfilled considering the following two criteria:
 
-  - `1. Comparing values between the observed census data of the totals
-    by locality per variable with estimated values.`
+-   `1. Comparing values between the observed census data of the totals by locality per variable with estimated values.`
 
 | Observed totals by locality        | Estimated totals by locality                                                                                |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+|------------------------------------|-------------------------------------------------------------------------------------------------------------|
 | Known value of a targeted variable | Defined with the sum of estimated values of many blocks that compound the target variables (sum by columns) |
 
 The bellow graph shows a comparison of observed and estimated totals by
 locality of the variables of interest.
 
-![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+![](1-Private_data_estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
-  - `2. Comparing values between the observed census data of the totals
-    by block per variable with estimated values.`
+-   `2. Comparing values between the observed census data of the totals by block per variable with estimated values.`
 
 | Observed totals by blocks          | Estimated totals by blocks                                                                               |
-| ---------------------------------- | -------------------------------------------------------------------------------------------------------- |
+|------------------------------------|----------------------------------------------------------------------------------------------------------|
 | Known value of a targeted variable | Defined with the sum of estimated values of many blocks that compound the target variables (sum by rows) |
 
 The bellow graph shows a comparison of observed and estimated totals by
 block of the variables of interest.
 
-![](1-Private-data-estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+![](1-Private_data_estimation-Hue_CPV2010_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 <br>
 
 The bellow table is a sample of filled NA values.
 
 | P\_0A2.f | P\_0A2\_M.f | P\_0A2\_F.f | P\_3A5.f | P\_3A5\_M.f | P\_3A5\_F.f | P\_6A11.f | P\_6A11\_M.f | P\_6A11\_F.f |
-| -------: | ----------: | ----------: | -------: | ----------: | ----------: | --------: | -----------: | -----------: |
+|---------:|------------:|------------:|---------:|------------:|------------:|----------:|-------------:|-------------:|
 |        0 |           0 |           0 |        2 |           0 |           2 |         2 |            2 |            0 |
 |        4 |           2 |           2 |        4 |           3 |           1 |         6 |            4 |            2 |
 |        3 |           1 |           2 |        4 |           3 |           1 |         6 |            3 |            3 |
@@ -547,11 +535,11 @@ The bellow table is a sample of filled NA values.
 
 ### 4.1.2 Conclusion
 
-  - Results demonstrate that the algorithm can estimate inaccessible
+-   Results demonstrate that the algorithm can estimate inaccessible
     census data at small spatial units with low population density.
 
-  - The proposed algorithmic method enables the implementation of more
+-   The proposed algorithmic method enables the implementation of more
     complex applications.
 
-  - As future research, it will be simulated a complex problem of
+-   As future research, it will be simulated a complex problem of
     pollution.
