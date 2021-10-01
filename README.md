@@ -23,6 +23,8 @@ Author: Néstor de la Paz Ruíz
       - [4.1 sGISc 2021 Conference
         Poster](#41-sgisc-2021-conference-poster)
 
+A CODECHECK certificate is available confirming that the computations underlying the poster could be independently reproduced: [![CODECHECK](https://codecheck.org.uk/img/codeworks-badge.svg)](https://doi.org/10.5281/zenodo.5543112)
+
 # 1\. Introduction
 
 **Enabling SMS with the estimation of block census private data**
