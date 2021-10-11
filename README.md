@@ -1,6 +1,8 @@
 Census private data estimation
 ================
-Author: Néstor de la Paz Ruíz
+Author:           Néstor de la Paz Ruíz
+<br>
+Code repository: [![DOI](https://zenodo.org/badge/404667606.svg)](https://zenodo.org/badge/latestdoi/404667606)
 
   - [1. Introduction](#1-introduction)
       - [1.1 Problem](#11-problem)
